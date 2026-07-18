@@ -121,15 +121,15 @@ Same-Host-Vergleich mit 100.000 Tracks maß:
 
 | Messung | Vorher | Nachher | Ergebnis |
 |---|---:|---:|---:|
-| Letztes Titel-Fenster mit 200 Zeilen | 53,605 µs | 1,333 µs | **-97.51%** |
-| Projektion der Playback-IDs | 8,125 µs | 298 µs | **-96.33%** |
+| Letztes Titel-Fenster mit 200 Zeilen | 53.605 µs | 1.333 µs | **-97,51 %** |
+| Projektion der Playback-IDs | 8.125 µs | 298 µs | **-96,33 %** |
 | SQLite-Plan | Full Scan + temporärer B-Tree | partieller Index-Scan | temporäre Sortierung entfernt |
-| Datenbankgröße | Ausgangswert | +2,379,776 Bytes | **+9.85%** expliziter Trade-off |
+| Datenbankgröße | Ausgangswert | +2.379.776 Bytes | **+9,85 %** expliziter Trade-off |
 
 Das Tracklistenmodell bleibt unabhängig davon auf **8 gecachte SQL-Fenster und
 1.600 gehaltene Zeilen** begrenzt — gleich bei 10.000 und 100.000 Tracks. Fünf
 frische Prozesse maßen 100.000 Queue-Einträge mit einem RSS-Delta von 1.609.728
-Bytes beziehungsweise **16.10 bytes/track**.
+Bytes beziehungsweise **16,10 Byte/Track**.
 
 ```sh
 scripts/performance-baseline.sh /tmp/reprise-before
