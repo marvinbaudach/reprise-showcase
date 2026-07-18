@@ -10,9 +10,10 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/app%20code-40.6k%20lines-22262b?style=flat-square&labelColor=16181b" alt="40.6k lines of application code">
-  <img src="https://img.shields.io/badge/test%20code-19.1k%20lines-22262b?style=flat-square&labelColor=16181b" alt="19.1k lines of test code">
+  <img src="https://img.shields.io/badge/app%20code-57.6k%20lines-22262b?style=flat-square&labelColor=16181b" alt="57.6k lines of application code">
+  <img src="https://img.shields.io/badge/test%20code-30.3k%20lines-22262b?style=flat-square&labelColor=16181b" alt="30.3k lines of test code">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
+  <img src="https://img.shields.io/badge/merge%20gates-12-22262b?style=flat-square&labelColor=16181b" alt="12 quality gates per merge">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
@@ -101,28 +102,40 @@ flowchart TB
 
 | Crate | Role | Rust code |
 |---|---|---|
-| `reprise-core` | 100 % of the domain logic — library, queries, playlists, queue semantics, stats, scrobbling, import. No GUI dependencies. | 17.7k lines |
-| `reprise-gnome` | The GTK4/libadwaita shell — views, widgets, theming. No domain logic. | 39.5k lines |
-| `reprise-platform-linux` | GStreamer playback and D-Bus/MPRIS integration. | 2.4k lines |
+| `reprise-core` | 100 % of the domain logic — library, queries, playlists, queue semantics, stats, scrobbling, import. No GUI dependencies. | 26.2k lines |
+| `reprise-gnome` | The GTK4/libadwaita shell — views, widgets, theming. No domain logic. | 58.2k lines |
+| `reprise-platform-linux` | GStreamer playback and D-Bus/MPRIS integration. | 3.5k lines |
 
 ## By the numbers
 
 | Metric | Value |
 |---|---|
-| Rust code | 59.7k lines across 244 files in 3 crates |
-| — application code | 40,634 lines |
-| — test code | 19,107 lines (32 % of the codebase) |
-| Test functions | 1,101 — including 76 windowed GTK tests, each run process-isolated |
-| Core crate test ratio | more test code than application code (9.0k vs 8.8k lines) |
-| Documentation | 7.1k lines of rustdoc comments |
+| Rust code | 87.8k lines across 396 files in 3 crates |
+| — application code | 57,571 lines |
+| — test code | 30,343 lines (35 % of the codebase) |
+| Test functions | 1,618 — including 138 windowed GTK tests, each run process-isolated |
+| Core crate test ratio | more test code than application code (14.2k vs 12.1k lines) |
+| Documentation | 11.4k lines of rustdoc comments |
+| Quality gates per merge | 12, enforced by a pre-push hook — see below |
 
-<sub>Counted 2026-07-16 on the main branch with <code>tokei</code> (code lines, excluding blanks and comments); the application/test split uses a <code>#[cfg(test)]</code>-aware classifier over the same tree.</sub>
+<sub>Counted 2026-07-18 on commit <code>e0493d0</code> with <code>tokei</code> (code lines, excluding blanks and comments); the application/test split uses a <code>#[cfg(test)]</code>-aware classifier over the same tree, whose total differs from tokei's by under 0.1 %.</sub>
 
 ## Engineering practice
 
 - **Spec-driven.** Substantial features start as written specs and design documents in the repository; implementation follows the spec.
 - **Test-driven.** Domain logic is testable without GTK by construction. Windowed GTK tests run one-process-per-test; pointer-driven end-to-end flows run headlessly under Xvfb with a fake audio sink.
-- **Hard gates on every merge.** rustfmt, Clippy with warnings denied plus a curated pedantic lint set, rustdoc warnings-as-errors, and the full workspace suite. Release builds add display-test, end-to-end, packaging, and translation checks.
+- **Twelve hard gates on every merge.** A pre-push hook runs `check-merge-readiness.sh`; nothing reaches `main` that has not passed all of it:
+
+  | # | Gate | # | Gate |
+  |---|---|---|---|
+  | 1 | Branch diff — whitespace and conflict markers | 7 | `cargo doc` with warnings denied |
+  | 2 | Architecture lint — core stays GUI-free, file-size caps, frontend allowlists | 8 | Full workspace test suite |
+  | 3 | UX traceability — every active UX rule owns a named test | 9 | Display tests, rule-named |
+  | 4 | Motion token lint | 10 | Display tests, motion |
+  | 5 | `cargo fmt --check` | 11 | Display tests, CSS parsing |
+  | 6 | `cargo clippy` with warnings denied plus a curated pedantic set | 12 | `cargo audit` — dependency advisories |
+
+  Gates 9–11 are true end-to-end: they launch the real GTK application under `dbus-run-session` and `xvfb-run` with a fake audio sink, one process per test. Release builds add packaging and translation checks on top.
 - **Agent-orchestrated.** The codebase is built end-to-end with AI coding agents (Claude Code and Codex), directed task-by-task against written specs — the test suite and the lint gates are the merge authority.
 
 ## Roadmap
