@@ -72,28 +72,7 @@ small, genuinely native UI and integration layer.
 
 ## Architecture: one core, native edges
 
-```mermaid
-flowchart TB
-    subgraph edges["Native and agent-facing edges"]
-        direction LR
-        gnome["reprise-gnome<br/>GTK4 · libadwaita<br/>today"]
-        native["native frontends<br/>macOS · Windows · mobile<br/>planned"]
-        mcp["MCP server<br/>planned"]
-        ai["AI modules<br/>music · visual effects<br/>planned"]
-    end
-    core["reprise-core<br/>library · SQLite queries · queue · playlists<br/>settings · playback/media/waveform contracts"]
-    linux["reprise-platform-linux<br/>GStreamer · MPRIS · MTP · Trash"]
-
-    gnome --> core
-    gnome --> linux
-    linux -. implements contracts .-> core
-    native -. reuses .-> core
-    mcp -. uses narrow capabilities .-> core
-    ai -. plugs into explicit seams .-> core
-
-    classDef today stroke:#33c9a3,stroke-width:2px
-    class gnome,core,linux today
-```
+![Reprise architecture: the native GNOME frontend and future frontends reuse a portable core, while a separate Linux adapter provides GStreamer, MPRIS, MTP, and host integration.](assets/reprise-architecture.svg)
 
 | Crate | Responsibility | Enforced boundary |
 |---|---|---|
@@ -116,6 +95,8 @@ and never touch music files or a real user database.
 The first benchmark-driven optimization replaced a full scan plus temporary
 sort with a partial `NOCASE` title index. The accepted same-host 100,000-track
 comparison measured:
+
+![Reprise performance at 100,000 tracks: the final title window improved by 97.51 percent, playback-ID projection improved by 96.33 percent, the track-list cache stays bounded to eight SQL windows and 1,600 rows, and the index adds 9.85 percent database storage.](assets/reprise-performance.svg)
 
 | Measurement | Before | After | Result |
 |---|---:|---:|---:|
