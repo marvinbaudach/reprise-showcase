@@ -5,21 +5,29 @@
   <img src="assets/wordmark.svg" alt="Reprise" width="300">
 </picture>
 
-<p><strong>A native GTK4 / libadwaita music player for GNOME, written in Rust — a modern successor to Rhythmbox.</strong></p>
+<p><strong>A native GTK4 / libadwaita music player for GNOME, written in Rust — and a test bed for one portable core with thin native frontends.</strong></p>
+
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/app%20code-57.6k%20lines-22262b?style=flat-square&labelColor=16181b" alt="57.6k lines of application code">
-  <img src="https://img.shields.io/badge/test%20code-30.3k%20lines-22262b?style=flat-square&labelColor=16181b" alt="30.3k lines of test code">
+  <img src="https://img.shields.io/badge/product%20code-58.1k%20lines-22262b?style=flat-square&labelColor=16181b" alt="58.1k lines of product code">
+  <img src="https://img.shields.io/badge/test%20code-30.7k%20lines-22262b?style=flat-square&labelColor=16181b" alt="30.7k lines of test code">
+  <img src="https://img.shields.io/badge/tests-1%2C482%20passing-22262b?style=flat-square&labelColor=16181b" alt="1,482 passing tests">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
-  <img src="https://img.shields.io/badge/merge%20gates-12-22262b?style=flat-square&labelColor=16181b" alt="12 quality gates per merge">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
+<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet</sub></p>
+
 </div>
 
-Reprise is built local-library first: fast virtualized views over large collections, serious metadata tooling, listening statistics, and tight desktop integration — with all domain logic in a platform-neutral Rust core.
+Reprise is built local-library first: virtualized views over large collections,
+serious metadata tooling, listening statistics, Android sync, and tight GNOME
+integration. The product is also an architecture experiment: domain behavior
+lives in a platform-neutral Rust core, while every platform should keep a
+small, genuinely native UI and integration layer.
 
 ## Interface
 
@@ -46,108 +54,154 @@ Reprise is built local-library first: fast virtualized views over large collecti
   </tr>
 </table>
 
-<p align="center"><sub>Interface previews from the design system — screenshots of the running app are landing here shortly.</sub></p>
+<p align="center"><sub>Design-system previews, not fabricated runtime screenshots. Captures of the running app will replace them after the native GNOME visual pass.</sub></p>
 
-## Features
+## Product surface
 
 | Area | Built |
 |---|---|
-| Library | SQLite-backed catalog, virtualized column views (Tracks · Albums · Artists), incremental scans with file-move detection |
-| Playback | GStreamer pipeline: gapless, crossfade, 10-band equalizer, ReplayGain, waveform seek bar with per-track peaks |
-| Queue | Persistent play queue, shuffle and repeat, full session restore |
-| Playlists | Manual and smart playlists, M3U import/export |
-| Search & filter | Full-text search, filter chips, per-column sorting with persisted custom layouts |
-| Metadata | Batch tag editor with MusicBrainz lookup, cover-art fetching |
-| Lyrics | Synced and static lyrics with LRCLIB fetching |
-| Statistics | Listening-time dashboard: hours, top artists and albums, 12-month activity chart |
-| Scrobbling | Last.fm and ListenBrainz, offline queue, connection testing |
-| Desktop | MPRIS media keys and lock-screen metadata, multiple named dark themes, cover-derived accent color |
-| Devices | Android sync over MTP with delta computation and optional Opus transcoding |
-| Migration | One-shot Rhythmbox import: library, play counts, ratings, playlists |
+| Library | SQLite-backed catalog, virtualized Tracks/Albums/Artists views, incremental scans, live watching, move and missing-file detection |
+| Playback | GStreamer pipeline with gapless, crossfade, ten-band equalizer, ReplayGain, queue, shuffle/repeat, and waveform seeking |
+| Metadata | Multi-track tag editor that writes only changed fields, MusicBrainz lookup, embedded/folder/online covers |
+| Search and organization | Full-field search, filter chips, persistent custom columns, manual/smart playlists, M3U import/export |
+| Lyrics and discovery | Synchronized/static lyrics, cached LRCLIB lookup, optional artist and album news |
+| Desktop | MPRIS media keys, quick settings, notifications, lock-screen metadata, themes, cover-derived accent |
+| Devices | Android MTP browsing and delta sync with progress, cancellation, playlists, and optional Opus transcoding |
+| Services | Independent default-off ListenBrainz and Last.fm modules with keyring credentials and durable offline queues |
+| Migration and safety | One-shot Rhythmbox import, no-autoplay session restore, missing/import issue flows, database-only remove, confirmed Trash |
 
-## Architecture
-
-One platform-neutral core, thin native shells. The GNOME app is the first shell — not the boundary of the design.
+## Architecture: one core, native edges
 
 ```mermaid
 flowchart TB
-    subgraph shells["Application shells"]
+    subgraph edges["Native and agent-facing edges"]
         direction LR
         gnome["reprise-gnome<br/>GTK4 · libadwaita<br/>today"]
-        macos["macOS<br/>target"]
-        win["Windows<br/>target"]
-        ios["iOS<br/>target"]
-        android["Android<br/>target"]
+        native["native frontends<br/>macOS · Windows · mobile<br/>planned"]
+        mcp["MCP server<br/>planned"]
+        ai["AI modules<br/>music · visual effects<br/>planned"]
     end
-    core["reprise-core<br/>platform-neutral domain logic<br/>library · queue · playlists · stats · scrobbling · import"]
-    pl["reprise-platform-linux"]
-    subgraph infra["Platform services"]
-        direction LR
-        gst["GStreamer<br/>playback"]
-        sqlite["SQLite<br/>catalog"]
-        dbus["D-Bus · MPRIS<br/>desktop"]
-    end
+    core["reprise-core<br/>library · SQLite queries · queue · playlists<br/>settings · playback/media/waveform contracts"]
+    linux["reprise-platform-linux<br/>GStreamer · MPRIS · MTP · Trash"]
+
     gnome --> core
-    macos -.-> core
-    win -.-> core
-    ios -.-> core
-    android -.-> core
-    core --> sqlite
-    gnome --> pl
-    pl --> gst
-    pl --> dbus
+    gnome --> linux
+    linux -. implements contracts .-> core
+    native -. reuses .-> core
+    mcp -. uses narrow capabilities .-> core
+    ai -. plugs into explicit seams .-> core
+
     classDef today stroke:#33c9a3,stroke-width:2px
-    class gnome today
+    class gnome,core,linux today
 ```
 
-| Crate | Role | Rust code |
+| Crate | Responsibility | Enforced boundary |
 |---|---|---|
-| `reprise-core` | 100 % of the domain logic — library, queries, playlists, queue semantics, stats, scrobbling, import. No GUI dependencies. | 26.2k lines |
-| `reprise-gnome` | The GTK4/libadwaita shell — views, widgets, theming. No domain logic. | 58.2k lines |
-| `reprise-platform-linux` | GStreamer playback and D-Bus/MPRIS integration. | 3.5k lines |
+| `reprise-core` | Library, database facades, queue semantics, playlists, settings, modules, and platform contracts | No GTK, libadwaita, GStreamer, zbus, or GLib dependencies |
+| `reprise-gnome` | GTK4/libadwaita composition, native interactions, accessibility, theming, and presentation | No productive SQL, blocking HTTP, direct GStreamer coupling, or unreviewed unsafe code |
+| `reprise-platform-linux` | Linux implementations for audio, media integration, devices, waveform extraction, and Trash | Implements the core contracts; UI code receives interfaces |
+
+This is deliberately not a shared web shell. The Rust core owns data and
+behavior; platform-specific frontends own native interaction patterns. The
+current GTK app proves the boundary today, while additional frontends remain a
+roadmap direction rather than a shipped claim.
+
+## Performance: measure, change, compare
+
+Performance work starts with generated evidence, not intuition. Release-mode
+benchmarks create isolated 10,000- and 100,000-track metadata profiles, retain
+stable JSON plus a commit/build manifest, reject existing output directories,
+and never touch music files or a real user database.
+
+The first benchmark-driven optimization replaced a full scan plus temporary
+sort with a partial `NOCASE` title index. The accepted same-host 100,000-track
+comparison measured:
+
+| Measurement | Before | After | Result |
+|---|---:|---:|---:|
+| Final 200-row title window | 53,605 µs | 1,333 µs | **-97.51%** |
+| Playback-ID projection | 8,125 µs | 298 µs | **-96.33%** |
+| SQLite plan | full scan + temporary B-tree | partial index scan | temporary sort removed |
+| Database size | baseline | +2,379,776 bytes | **+9.85%** explicit trade-off |
+
+The track-list model is separately held to **8 cached SQL windows and 1,600
+retained rows**, unchanged between 10,000 and 100,000 tracks. Five fresh
+processes measured 100,000 queue entries at 1,609,728 bytes RSS delta, or
+**16.10 bytes/track**.
+
+```sh
+scripts/performance-baseline.sh /tmp/reprise-before
+# implement the candidate change, then measure its commit
+scripts/performance-baseline.sh /tmp/reprise-after
+scripts/performance-query-compare.sh \
+  /tmp/reprise-before /tmp/reprise-after > /tmp/query-comparison.json
+```
+
+The full runtime suite also observes installed-app startup, realized GTK
+rows/cells, provider/model counts, queue memory, and CUA-driven scroll response.
+It fails closed when private D-Bus/Xvfb/AT-SPI sockets are unavailable and never
+falls back to a live desktop. Timings are same-host comparison evidence, not
+portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 ## By the numbers
 
-| Metric | Value |
-|---|---|
-| Rust code | 87.8k lines across 396 files in 3 crates |
-| — application code | 57,571 lines |
-| — test code | 30,343 lines (35 % of the codebase) |
-| Test functions | 1,618 — including 138 windowed GTK tests, each run process-isolated |
-| Core crate test ratio | more test code than application code (14.2k vs 12.1k lines) |
-| Documentation | 11.4k lines of rustdoc comments |
-| Quality gates per merge | 12, enforced by a pre-push hook — see below |
+| Metric | Current evidence |
+|---|---:|
+| Rust code | 88,789 lines |
+| — product code | 58,053 lines |
+| — test code | 30,736 lines |
+| Workspace gate | 1,482 passing tests: 758 core · 669 GNOME · 55 Linux platform |
+| Controlled-condition tests | 139 separated from the default run, including 138 GNOME display/host tests |
+| UX contracts | 60 active rules, each requiring a rule-named test |
+| Quality gates | 12 hard merge gates plus release/package checks |
 
-<sub>Counted 2026-07-18 on commit <code>e0493d0</code> with <code>tokei</code> (code lines, excluding blanks and comments); the application/test split uses a <code>#[cfg(test)]</code>-aware classifier over the same tree, whose total differs from tokei's by under 0.1 %.</sub>
+<sub>Rust lines were counted on the committed performance close-out with the reproducible, <code>#[cfg(test)]</code>-aware analyzer used by the application/CV repository. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
 
 ## Engineering practice
 
-- **Spec-driven.** Substantial features start as written specs and design documents in the repository; implementation follows the spec.
-- **Test-driven.** Domain logic is testable without GTK by construction. Windowed GTK tests run one-process-per-test; pointer-driven end-to-end flows run headlessly under Xvfb with a fake audio sink.
-- **Twelve hard gates on every merge.** A pre-push hook runs `check-merge-readiness.sh`; nothing reaches `main` that has not passed all of it:
+- **Spec- and test-driven.** Substantial work starts from written decisions and
+  a task plan. Each task follows a red/green loop and gets an adversarial diff
+  review before its dedicated commit.
+- **Twelve hard merge gates.** Formatting, strict all-target Clippy, warning-
+  free Rustdoc, the full workspace suite, dependency audit, architecture
+  policy, UX traceability, motion tokens, and isolated display/CSS checks are
+  enforced together.
+- **A deep core, checked mechanically.** `cargo tree` proves core purity. The
+  architecture linter also keeps Rust files below 800 lines, limits UI
+  composition roots, and blocks coupling patterns that would make another
+  native frontend expensive.
+- **UX and accessibility as contracts.** The rulebook covers playback,
+  keyboard/focus behavior, feedback, tooltips, reachability, and motion. Every
+  active rule owns a named test. All seven motion rules are active; reduced
+  motion overrides decorative animation.
+- **Honest verification layers.** Pure core tests, one-process GTK tests,
+  pointer-driven Xvfb flows, semantic CUA/AT-SPI flows, and manual GNOME/
+  hardware checks each state what they can and cannot prove.
+- **Agent-orchestrated, gate-controlled.** Claude Code and Codex implement
+  bounded tasks against the written contracts. Tests and gates, not generated
+  confidence, are the merge authority.
 
-  | # | Gate | # | Gate |
-  |---|---|---|---|
-  | 1 | Branch diff — whitespace and conflict markers | 7 | `cargo doc` with warnings denied |
-  | 2 | Architecture lint — core stays GUI-free, file-size caps, frontend allowlists | 8 | Full workspace test suite |
-  | 3 | UX traceability — every active UX rule owns a named test | 9 | Display tests, rule-named |
-  | 4 | Motion token lint | 10 | Display tests, motion |
-  | 5 | `cargo fmt --check` | 11 | Display tests, CSS parsing |
-  | 6 | `cargo clippy` with warnings denied plus a curated pedantic set | 12 | `cargo audit` — dependency advisories |
+## Roadmap: the same core beyond today’s player
 
-  Gates 9–11 are true end-to-end: they launch the real GTK application under `dbus-run-session` and `xvfb-run` with a fake audio sink, one process per test. Release builds add packaging and translation checks on top.
-- **Agent-orchestrated.** The codebase is built end-to-end with AI coding agents (Claude Code and Codex), directed task-by-task against written specs — the test suite and the lint gates are the merge authority.
+The following are architectural directions, not shipped features.
 
-## Roadmap
+| Direction | Intended seam | Non-negotiable constraint |
+|---|---|---|
+| **MCP server** | Narrow adapter over core library queries, playlists, queue, and playback contracts | Explicit capabilities, read-only by default, no path/credential leakage |
+| **AI-generated music** | Provider-neutral optional module; results enter the ordinary import pipeline | Provenance and explicit user action; never silent library mutation |
+| **AI visual effects** | Platform analysis contract plus a native renderer per frontend | Bounded work, no audio-thread blocking, high-contrast fallback, reduced-motion/off wins |
+| **Thin native frontends** | SwiftUI, WinUI, mobile, or another Linux toolkit reuses the MIT Rust core and supplies platform implementations | Native interaction patterns instead of lowest-common-denominator UI |
+| **Distribution** | Flatpak/Flathub packaging, gettext completion, and a real GNOME release pass | No release claim before package, translation, display, audio, portal, and hardware evidence is complete |
 
-- Flatpak packaging and a Flathub release (desktop entry and AppStream metadata are already in-tree)
-- First public release once Rhythmbox migration and packaging are polished
-- Deeper artist pages: biography, tour dates, new-release tracking
-- A second shell (macOS) as the proof of the core boundary; i18n rollout (gettext in place, German first)
+The existing module registry and playback/media/waveform contracts are the
+starting seams. Experimental AI and agent behavior stays outside the core
+domain model until those interfaces and safety rules are proven.
 
-## Source & contact
+## Source and contact
 
-The source is private to keep a commercial option open — a full code walkthrough is a conversation away.
+The production source is private to preserve a commercial option. This public
+repository documents the product, architecture, and verifiable engineering
+evidence; a code walkthrough is a conversation away.
 
 **Marvin Baudach** · m.baudach@pm.me · [linkedin.com/in/marvin-baudach](https://www.linkedin.com/in/marvin-baudach)
 
