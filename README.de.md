@@ -77,7 +77,7 @@ Integrationsschicht ergänzen.
 
 ## Architektur: ein Core, native Ränder
 
-![Reprise-Architektur: Das native GNOME-Frontend und künftige Frontends nutzen einen portablen Core; ein separater Linux-Adapter liefert GStreamer, MPRIS, MTP und Host-Integration.](assets/reprise-architecture.svg)
+![Reprise-Architektur: Das native GNOME-Frontend und künftige Frontends nutzen einen portablen Core; ein separater Linux-Adapter liefert GStreamer, MPRIS, MTP und Host-Integration.](assets/reprise-architecture-de.svg)
 
 | Crate | Verantwortung | Erzwungene Grenze |
 |---|---|---|
@@ -102,7 +102,7 @@ Die erste benchmarkgetriebene Optimierung ersetzte Full Scan plus temporäre
 Sortierung durch einen partiellen `NOCASE`-Titelindex. Der akzeptierte
 Same-Host-Vergleich mit 100.000 Tracks maß:
 
-![Reprise-Performance bei 100.000 Tracks: Das letzte Titelfenster wurde um 97,51 Prozent schneller, die Playback-ID-Projektion um 96,33 Prozent; der Cache bleibt auf acht SQL-Fenster und 1.600 Zeilen begrenzt, der Index kostet 9,85 Prozent zusätzlichen Datenbankspeicher.](assets/reprise-performance.svg)
+![Reprise-Performance bei 100.000 Tracks: Das letzte Titelfenster wurde um 97,51 Prozent schneller, die Playback-ID-Projektion um 96,33 Prozent; der Cache bleibt auf acht SQL-Fenster und 1.600 Zeilen begrenzt, der Index kostet 9,85 Prozent zusätzlichen Datenbankspeicher.](assets/reprise-performance-de.svg)
 
 | Messung | Vorher | Nachher | Ergebnis |
 |---|---:|---:|---:|
