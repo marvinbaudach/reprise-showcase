@@ -36,7 +36,7 @@ piccola e realmente nativa.
 
 ## Architettura: un core, bordi nativi
 
-![Architettura Reprise: il frontend GNOME e i futuri frontend riutilizzano un core portabile, mentre l’adattatore Linux fornisce GStreamer, MPRIS, MTP e integrazione host.](assets/reprise-architecture.svg)
+![Architettura Reprise: il frontend GNOME e i futuri frontend riutilizzano un core portabile, mentre l’adattatore Linux fornisce GStreamer, MPRIS, MTP e integrazione host.](assets/reprise-architecture-it.svg)
 
 Il core non dipende da GTK, libadwaita, GStreamer, zbus o GLib. Gate automatici
 impediscono SQL produttivo, HTTP bloccante e accoppiamento diretto a GStreamer
@@ -49,7 +49,7 @@ Ogni ottimizzazione parte da profili sintetici isolati e produce evidenza
 prima/dopo riproducibile. Profiling, piani query, cache limitate, budget di
 memoria e trade-off degli indici fanno parte della modifica.
 
-![Prestazioni Reprise su 100.000 brani: finestra titoli -97,51%, proiezione ID -96,33%, cache limitata a otto finestre e 1.600 righe; l’indice costa +9,85% di spazio.](assets/reprise-performance.svg)
+![Prestazioni Reprise su 100.000 brani: finestra titoli -97,51%, proiezione ID -96,33%, cache limitata a otto finestre e 1.600 righe; l’indice costa +9,85% di spazio.](assets/reprise-performance-it.svg)
 
 I tempi sono confronti sullo stesso host, non soglie portabili. Cache e memoria
 sono invece contratti deterministici.
