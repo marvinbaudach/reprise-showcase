@@ -9,7 +9,7 @@
 
 <p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
 
-<p><sub>Iniciado el 11 de julio de 2026 · proyecto de portfolio activo · sin versión pública todavía</sub></p>
+<p><sub>Iniciado el 11 de julio de 2026 · proyecto de portfolio activo · sin versión pública todavía · evidencia actualizada el 20 de julio de 2026</sub></p>
 
 </div>
 

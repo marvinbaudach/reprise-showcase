@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/statut-actif-33c9a3?style=flat-square&labelColor=16181b" alt="statut : actif">
 </p>
 
-<p><sub>Démarré le 11 juillet 2026 · projet de portfolio actif · aucune version publique à ce jour</sub></p>
+<p><sub>Démarré le 11 juillet 2026 · projet de portfolio actif · aucune version publique à ce jour · preuves actualisées le 20 juillet 2026</sub></p>
 
 </div>
 
