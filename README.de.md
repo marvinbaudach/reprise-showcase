@@ -173,9 +173,10 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 - **Kontrollierte Auslieferung.** Feature-Branches laufen durch PR-Gates nach
   `dev` und danach in das stabile `main`. Isolierte Previews für jeden PR
   sind der nächste geplante Delivery-Schritt.
-- **Agent-orchestriert, durch Gates kontrolliert.** Claude Code und Codex
-  implementieren begrenzte Tasks gegen die schriftlichen Verträge. Tests und
-  Gates sind die Merge-Autorität, nicht generiertes Selbstvertrauen.
+- **Tools unterstützen den Ablauf; geprüft wird das Ergebnis.** Claude Code
+  und Codex bearbeiten klar abgegrenzte Aufgaben nach schriftlichen Vorgaben.
+  Übernommen wird eine Änderung erst, wenn alle relevanten Tests und
+  Qualitätsprüfungen bestanden sind.
 
 ## Roadmap: derselbe Core über den heutigen Player hinaus
 
