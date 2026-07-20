@@ -56,15 +56,14 @@
   <circle cx="75" cy="845" r="240" fill="#2ec7a6" opacity="0.055"/>
 
   <g class="sans">
-    <g transform="translate(76 64)">
-      <rect width="48" height="48" rx="13" fill="#3584e4"/>
-      <circle cx="24" cy="24" r="15" fill="#241f31"/>
-      <circle cx="24" cy="24" r="5" fill="#ff7800"/>
-      <circle cx="24" cy="24" r="1.8" fill="#f6f5f4"/>
-      <path d="M11 20a15 15 0 0 1 23-8l-3 1 1-4 2 2A19 19 0 0 0 9 19z" fill="#f6f5f4"/>
-      <path d="M37 28a15 15 0 0 1-23 8l3-1-1 4-2-2a19 19 0 0 0 25-8z" fill="#f6f5f4"/>
+    <g transform="translate(76 66)">
+      <rect x="0" y="15" width="6" height="14" rx="3" fill="#33c9a3"/>
+      <rect x="10" y="6" width="6" height="30" rx="3" fill="#33c9a3"/>
+      <rect x="20" y="0" width="6" height="42" rx="3" fill="#33c9a3"/>
+      <rect x="30" y="10" width="6" height="22" rx="3" fill="#33c9a3"/>
+      <rect x="40" y="4" width="6" height="34" rx="3" fill="#33c9a3"/>
     </g>
-    <text x="142" y="84" class="eyebrow" fill="#8fbff5">REPRISE</text>
+    <text x="142" y="84" class="eyebrow" fill="#e7e9ec">REPRISE</text>
     <text x="142" y="108" class="small" fill="#94a3b8">WORKSPACE A TRE CRATE</text>
 
     <text x="76" y="174" class="title" fill="#f8fafc">Nativo dove conta.</text>
