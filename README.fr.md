@@ -177,9 +177,10 @@ déterministes de cache et de mémoire sont des tests stricts.
 - **Livraison contrôlée.** Les branches de fonctionnalité passent les contrôles
   de PR vers `dev`, puis vers `main` stable. Une prévisualisation isolée pour
   chaque PR constitue la prochaine amélioration planifiée.
-- **Orchestré par des agents, gouverné par les contrôles.** Claude Code et Codex
-  réalisent des tâches délimitées conformément aux contrats écrits. Les tests
-  et les contrôles, non la confiance générée, autorisent la fusion.
+- **Les outils accompagnent le travail ; les contrôles valident le résultat.**
+  Claude Code et Codex aident à réaliser des tâches clairement délimitées à
+  partir d’exigences écrites. Une modification n’est fusionnée qu’après la
+  réussite des tests et contrôles qualité requis.
 
 ## Feuille de route : le même cœur au-delà du lecteur actuel
 
