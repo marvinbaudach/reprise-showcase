@@ -78,7 +78,7 @@ véritablement natives.
 
 ## Architecture : un cœur, des périphéries natives
 
-![Architecture de Reprise : l'interface GNOME native et les futures interfaces réutilisent un cœur portable, tandis qu'un adaptateur Linux séparé fournit GStreamer, MPRIS, MTP et l'intégration au système.](assets/reprise-architecture.svg)
+![Architecture de Reprise : l'interface GNOME native et les futures interfaces réutilisent un cœur portable, tandis qu'un adaptateur Linux séparé fournit GStreamer, MPRIS, MTP et l'intégration au système.](assets/reprise-architecture-fr.svg)
 
 | Crate | Responsabilité | Frontière imposée |
 |---|---|---|
@@ -104,7 +104,7 @@ La première optimisation guidée par benchmark a remplacé un parcours complet
 avec tri temporaire par un index partiel de titres en `NOCASE`. La comparaison
 acceptée sur la même machine avec 100 000 morceaux a mesuré :
 
-![Performance de Reprise avec 100 000 morceaux : la dernière fenêtre de titres gagne 97,51 %, la projection des identifiants de lecture 96,33 % ; le cache reste limité à huit fenêtres SQL et 1 600 lignes, tandis que l'index ajoute 9,85 % de stockage à la base.](assets/reprise-performance.svg)
+![Performance de Reprise avec 100 000 morceaux : la dernière fenêtre de titres gagne 97,51 %, la projection des identifiants de lecture 96,33 % ; le cache reste limité à huit fenêtres SQL et 1 600 lignes, tandis que l'index ajoute 9,85 % de stockage à la base.](assets/reprise-performance-fr.svg)
 
 | Mesure | Avant | Après | Résultat |
 |---|---:|---:|---:|
