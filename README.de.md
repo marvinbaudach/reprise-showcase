@@ -7,7 +7,7 @@
 
 <p><strong>Ein nativer GTK4-/libadwaita-Musikplayer für GNOME in Rust — und ein Testfeld für einen portablen Core mit schlanken nativen Frontends.</strong></p>
 
-<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a></p>
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-Edition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust Edition 2021">
@@ -29,6 +29,10 @@ und eine enge GNOME-Integration. Gleichzeitig ist das Produkt ein
 Architekturexperiment: Das Domänenverhalten lebt in einem plattformneutralen
 Rust-Core; jede Plattform soll nur eine kleine, wirklich native UI- und
 Integrationsschicht ergänzen.
+
+## Engineering auf einen Blick
+
+![Reprise auf einen Blick: ausgelieferte Produkttiefe, verbindliche Engineering-Qualität, kontrollierte Auslieferung und eine klar gestufte Roadmap.](assets/reprise-engineering-at-a-glance.svg)
 
 ## Oberfläche
 
@@ -157,10 +161,18 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 - **UX und Accessibility als Verträge.** Das Regelwerk umfasst Playback,
   Tastatur/Fokus, Feedback, Tooltips, Erreichbarkeit und Motion. Jede aktive
   Regel besitzt einen benannten Test. Alle sieben Motion-Regeln sind aktiv;
-  Reduced Motion gewinnt gegen dekorative Animation.
+  Reduced Motion gewinnt gegen dekorative Animation. Sichtbares Feedback —
+  einschließlich des Interaktionsziels unter 100 ms — ist vertraglich
+  festgelegt; manuelle und automatisierte Evidenz bleiben klar getrennt.
 - **Ehrliche Verifikationsschichten.** Reine Core-Tests, GTK-Einzelprozesse,
   Pointer-Flows unter Xvfb, semantische CUA-/AT-SPI-Flows und manuelle GNOME-/
   Hardwareprüfungen benennen jeweils, was sie beweisen können und was nicht.
+- **Gemessene Optimierung.** Performance-Änderungen bringen reproduzierbare
+  Vorher-/Nachher-Analysen, Query-Plan-Evidenz, begrenzte Caches und
+  Speicherbudgets sowie explizite Indexierungs-Trade-offs mit.
+- **Kontrollierte Auslieferung.** Feature-Branches laufen durch PR-Gates nach
+  `dev` und danach in das stabile `main`. Isolierte Previews für jeden PR
+  sind der nächste geplante Delivery-Schritt.
 - **Agent-orchestriert, durch Gates kontrolliert.** Claude Code und Codex
   implementieren begrenzte Tasks gegen die schriftlichen Verträge. Tests und
   Gates sind die Merge-Autorität, nicht generiertes Selbstvertrauen.
@@ -171,9 +183,9 @@ Die folgenden Punkte sind Architekturziele, keine ausgelieferten Features.
 
 | Richtung | Geplante Naht | Nicht verhandelbare Grenze |
 |---|---|---|
-| **MCP-Server** | Schmaler Adapter über Core-Queries, Playlists, Queue und Playback-Verträge | Explizite Capabilities, standardmäßig read-only, keine Pfad-/Credential-Leaks |
-| **KI-generierte Musik** | Providerneutrales optionales Modul; Ergebnisse laufen durch den normalen Importpfad | Herkunft und explizite Benutzeraktion; niemals stille Bibliotheksmutation |
-| **Visuelle KI-Effekte** | Plattform-Analysevertrag plus nativer Renderer je Frontend | Begrenzte Arbeit, kein Blockieren des Audio-Threads, High-Contrast-Fallback, Reduced Motion/Off gewinnt |
+| **In Entwicklung — analysebasierte Visuals** | Lokale Audio-Evidenz und Klangprofile steuern einen nativen Renderer | Begrenzte Arbeit, kein Blockieren des Audio-Threads, High-Contrast-Fallback, Reduced Motion/Off gewinnt |
+| **Architektur als Nächstes — MCP + CLI** | Schlanke Adapter nutzen eine gemeinsame Rust-Anwendungsschicht für Bibliothek, Playlists, Queue und Playback | Dasselbe getestete Verhalten in jedem Adapter; explizite Capabilities, standardmäßig read-only, keine Pfad-/Credential-Leaks |
+| **Explorativ — generatives Audio + Visuals** | Providerneutrale optionale Module für KI-Visuals, neue Songs, Instrumentals, Remixes und Genre-Transformation | Klare Herkunft und explizite Benutzeraktion; niemals stille Bibliotheksmutation |
 | **Schlanke native Frontends** | SwiftUI, WinUI, Mobile oder ein anderes Linux-Toolkit nutzt den MIT-Rust-Core und liefert Plattformimplementierungen | Native Interaktionsmuster statt UI auf dem kleinsten gemeinsamen Nenner |
 | **Distribution** | Flatpak-/Flathub-Paketierung, vollständiges gettext und reale GNOME-Abnahme | Kein Release-Claim ohne Packaging-, Übersetzungs-, Display-, Audio-, Portal- und Hardware-Evidenz |
 
