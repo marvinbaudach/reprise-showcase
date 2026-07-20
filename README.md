@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
-<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet</sub></p>
+<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 20 July 2026</sub></p>
 
 </div>
 
