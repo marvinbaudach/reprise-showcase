@@ -33,7 +33,7 @@ véritablement natives.
 
 ## L’ingénierie en un coup d’œil
 
-![Reprise en un coup d’œil : profondeur du produit livré, qualité d’ingénierie imposée, livraison contrôlée et feuille de route clairement structurée.](assets/reprise-engineering-at-a-glance.svg)
+![Reprise en un coup d’œil : profondeur du produit livré, qualité d’ingénierie imposée, livraison contrôlée et feuille de route clairement structurée.](assets/reprise-engineering-at-a-glance-fr.svg)
 
 ## Interface
 
