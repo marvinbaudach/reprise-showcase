@@ -46,13 +46,12 @@
   <circle cx="60" cy="875" r="235" fill="#57e0bf" opacity="0.055"/>
 
   <g class="sans">
-    <g transform="translate(72 56)">
-      <rect width="46" height="46" rx="13" fill="#3584e4"/>
-      <circle cx="23" cy="23" r="14" fill="#241f31"/>
-      <circle cx="23" cy="23" r="5" fill="#ff7800"/>
-      <circle cx="23" cy="23" r="1.7" fill="#f6f5f4"/>
-      <path d="M11 19a14 14 0 0 1 22-7l-3 1 1-4 2 2A18 18 0 0 0 9 19z" fill="#f6f5f4"/>
-      <path d="M35 27a14 14 0 0 1-22 7l3-1-1 4-2-2a18 18 0 0 0 24-8z" fill="#f6f5f4"/>
+    <g transform="translate(72 58)">
+      <rect x="0" y="15" width="6" height="14" rx="3" fill="#33c9a3"/>
+      <rect x="10" y="6" width="6" height="30" rx="3" fill="#33c9a3"/>
+      <rect x="20" y="0" width="6" height="42" rx="3" fill="#33c9a3"/>
+      <rect x="30" y="10" width="6" height="22" rx="3" fill="#33c9a3"/>
+      <rect x="40" y="4" width="6" height="34" rx="3" fill="#33c9a3"/>
     </g>
     <text x="136" y="75" class="eyebrow" fill="#8fbff5">REPRISE · INGENIERÍA DE UN VISTAZO</text>
     <text x="136" y="98" class="item" fill="#94a3b8">PRODUCTO · CALIDAD · DIRECCIÓN</text>
