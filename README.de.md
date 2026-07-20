@@ -32,7 +32,7 @@ Integrationsschicht ergänzen.
 
 ## Engineering auf einen Blick
 
-![Reprise auf einen Blick: ausgelieferte Produkttiefe, verbindliche Engineering-Qualität, kontrollierte Auslieferung und eine klar gestufte Roadmap.](assets/reprise-engineering-at-a-glance.svg)
+![Reprise auf einen Blick: ausgelieferte Produkttiefe, verbindliche Engineering-Qualität, kontrollierte Auslieferung und eine klar gestufte Roadmap.](assets/reprise-engineering-at-a-glance-de.svg)
 
 ## Oberfläche
 
