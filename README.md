@@ -7,7 +7,7 @@
 
 <p><strong>A native GTK4 / libadwaita music player for GNOME, written in Rust — and a test bed for one portable core with thin native frontends.</strong></p>
 
-<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a></p>
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
@@ -28,6 +28,10 @@ serious metadata tooling, listening statistics, Android sync, and tight GNOME
 integration. The product is also an architecture experiment: domain behavior
 lives in a platform-neutral Rust core, while every platform should keep a
 small, genuinely native UI and integration layer.
+
+## Engineering at a glance
+
+![Reprise at a glance: shipped product depth, enforced engineering quality, controlled delivery, and a clearly staged roadmap.](assets/reprise-engineering-at-a-glance.svg)
 
 ## Interface
 
@@ -154,10 +158,18 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 - **UX and accessibility as contracts.** The rulebook covers playback,
   keyboard/focus behavior, feedback, tooltips, reachability, and motion. Every
   active rule owns a named test. All seven motion rules are active; reduced
-  motion overrides decorative animation.
+  motion overrides decorative animation. Visible-feedback targets — including
+  the <100 ms interaction goal — are explicit contracts, with manual and
+  automated evidence kept distinct.
 - **Honest verification layers.** Pure core tests, one-process GTK tests,
   pointer-driven Xvfb flows, semantic CUA/AT-SPI flows, and manual GNOME/
   hardware checks each state what they can and cannot prove.
+- **Measured optimization.** Performance changes carry reproducible before/
+  after analysis, query-plan evidence, bounded caches and memory, and explicit
+  indexing trade-offs instead of unsupported speed claims.
+- **Controlled delivery.** Feature branches pass pull-request gates into
+  `dev`, then stable `main`. Isolated previews for every PR are the next
+  planned delivery improvement.
 - **Agent-orchestrated, gate-controlled.** Claude Code and Codex implement
   bounded tasks against the written contracts. Tests and gates, not generated
   confidence, are the merge authority.
@@ -168,9 +180,9 @@ The following are architectural directions, not shipped features.
 
 | Direction | Intended seam | Non-negotiable constraint |
 |---|---|---|
-| **MCP server** | Narrow adapter over core library queries, playlists, queue, and playback contracts | Explicit capabilities, read-only by default, no path/credential leakage |
-| **AI-generated music** | Provider-neutral optional module; results enter the ordinary import pipeline | Provenance and explicit user action; never silent library mutation |
-| **AI visual effects** | Platform analysis contract plus a native renderer per frontend | Bounded work, no audio-thread blocking, high-contrast fallback, reduced-motion/off wins |
+| **In development — analysis-driven visuals** | Local audio evidence and sound profiles drive a native renderer | Bounded work, no audio-thread blocking, high-contrast fallback, reduced-motion/off wins |
+| **Architecture next — MCP + CLI** | Thin adapters use one shared Rust application layer for library, playlist, queue, and playback behavior | Same tested behavior in every adapter; explicit capabilities, read-only by default, no path/credential leakage |
+| **Exploratory — generative audio + visuals** | Provider-neutral optional modules for AI visuals, new songs, instrumentals, remixes, and genre transformation | Provenance and explicit user action; never silent library mutation |
 | **Thin native frontends** | SwiftUI, WinUI, mobile, or another Linux toolkit reuses the MIT Rust core and supplies platform implementations | Native interaction patterns instead of lowest-common-denominator UI |
 | **Distribution** | Flatpak/Flathub packaging, gettext completion, and a real GNOME release pass | No release claim before package, translation, display, audio, portal, and hardware evidence is complete |
 

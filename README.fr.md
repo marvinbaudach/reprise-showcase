@@ -7,7 +7,7 @@
 
 <p><strong>Un lecteur de musique natif GTK4 / libadwaita pour GNOME, écrit en Rust — et un terrain d'expérimentation pour un cœur portable doté d'interfaces natives légères.</strong></p>
 
-<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a></p>
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-%C3%A9dition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust, édition 2021">
@@ -30,6 +30,10 @@ Le produit constitue également une expérience d'architecture : le comportement
 métier réside dans un cœur Rust indépendant de la plateforme, tandis que chaque
 plateforme conserve une interface et une couche d'intégration petites et
 véritablement natives.
+
+## L’ingénierie en un coup d’œil
+
+![Reprise en un coup d’œil : profondeur du produit livré, qualité d’ingénierie imposée, livraison contrôlée et feuille de route clairement structurée.](assets/reprise-engineering-at-a-glance-fr.svg)
 
 ## Interface
 
@@ -160,11 +164,19 @@ déterministes de cache et de mémoire sont des tests stricts.
 - **UX et accessibilité comme contrats.** Le règlement couvre la lecture, le
   clavier/focus, les retours, les infobulles, l'accessibilité et les animations.
   Chaque règle active possède un test nommé. Les sept règles d'animation sont
-  actives ; la réduction des animations prime sur toute décoration.
+  actives ; la réduction des animations prime sur toute décoration. Les délais
+  de retour visible — dont l'objectif d'interaction inférieur à 100 ms — sont
+  contractuels ; preuves manuelles et automatisées restent distinctes.
 - **Des niveaux de vérification honnêtes.** Tests purs du cœur, tests GTK dans
   un processus, parcours au pointeur sous Xvfb, parcours sémantiques CUA/AT-SPI
   et contrôles manuels GNOME/matériel indiquent chacun ce qu'ils peuvent ou ne
   peuvent pas prouver.
+- **Optimisation mesurée.** Les changements de performance incluent des
+  analyses avant/après reproductibles, les plans de requête, des caches et
+  budgets mémoire bornés, ainsi que les compromis explicites des index.
+- **Livraison contrôlée.** Les branches de fonctionnalité passent les contrôles
+  de PR vers `dev`, puis vers `main` stable. Une prévisualisation isolée pour
+  chaque PR constitue la prochaine amélioration planifiée.
 - **Orchestré par des agents, gouverné par les contrôles.** Claude Code et Codex
   réalisent des tâches délimitées conformément aux contrats écrits. Les tests
   et les contrôles, non la confiance générée, autorisent la fusion.
@@ -176,9 +188,9 @@ fonctionnalités livrées.
 
 | Orientation | Interface prévue | Contrainte non négociable |
 |---|---|---|
-| **Serveur MCP** | Adaptateur étroit sur les requêtes de bibliothèque, listes de lecture, file et contrats de lecture du cœur | Capacités explicites, lecture seule par défaut, aucune fuite de chemin ou d'identifiant |
-| **Musique générée par IA** | Module facultatif indépendant du fournisseur ; les résultats suivent le pipeline d'import normal | Provenance et action utilisateur explicite ; aucune mutation silencieuse de la bibliothèque |
-| **Effets visuels par IA** | Contrat d'analyse de plateforme et moteur de rendu natif pour chaque interface | Travail borné, aucun blocage du thread audio, solution de repli à fort contraste, priorité à la réduction/désactivation des animations |
+| **En développement — visuels pilotés par l’analyse** | Les preuves audio locales et profils sonores pilotent un moteur de rendu natif | Travail borné, aucun blocage du thread audio, solution à fort contraste, priorité à la réduction/désactivation des animations |
+| **Architecture suivante — MCP + CLI** | Des adaptateurs légers utilisent une même couche applicative Rust pour la bibliothèque, les listes, la file et la lecture | Même comportement testé dans chaque adaptateur ; capacités explicites, lecture seule par défaut, aucune fuite de chemin ou d’identifiant |
+| **Exploratoire — audio + visuels génératifs** | Modules facultatifs indépendants du fournisseur pour visuels IA, nouveaux morceaux, versions instrumentales, remixes et transformations de genre | Provenance et action utilisateur explicite ; aucune mutation silencieuse de la bibliothèque |
 | **Interfaces natives légères** | SwiftUI, WinUI, mobile ou autre toolkit Linux réutilise le cœur Rust MIT et fournit les implémentations de plateforme | Modèles d'interaction natifs plutôt qu'une UI au plus petit dénominateur commun |
 | **Distribution** | Paquet Flatpak/Flathub, finalisation de gettext et véritable validation GNOME | Aucune annonce de version avant les preuves de paquet, traduction, affichage, audio, portail et matériel |
 
