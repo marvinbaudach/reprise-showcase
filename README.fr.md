@@ -78,7 +78,7 @@ véritablement natives.
 
 ## Architecture : un cœur, des périphéries natives
 
-![Architecture de Reprise : l'interface GNOME native et les futures interfaces réutilisent un cœur portable, tandis qu'un adaptateur Linux séparé fournit GStreamer, MPRIS, MTP et l'intégration au système.](assets/reprise-architecture.svg)
+![Architecture de Reprise : l'interface GNOME native et les futures interfaces réutilisent un cœur portable, tandis qu'un adaptateur Linux séparé fournit GStreamer, MPRIS, MTP et l'intégration au système.](assets/reprise-architecture-fr.svg)
 
 | Crate | Responsabilité | Frontière imposée |
 |---|---|---|
@@ -104,7 +104,7 @@ La première optimisation guidée par benchmark a remplacé un parcours complet
 avec tri temporaire par un index partiel de titres en `NOCASE`. La comparaison
 acceptée sur la même machine avec 100 000 morceaux a mesuré :
 
-![Performance de Reprise avec 100 000 morceaux : la dernière fenêtre de titres gagne 97,51 %, la projection des identifiants de lecture 96,33 % ; le cache reste limité à huit fenêtres SQL et 1 600 lignes, tandis que l'index ajoute 9,85 % de stockage à la base.](assets/reprise-performance.svg)
+![Performance de Reprise avec 100 000 morceaux : la dernière fenêtre de titres gagne 97,51 %, la projection des identifiants de lecture 96,33 % ; le cache reste limité à huit fenêtres SQL et 1 600 lignes, tandis que l'index ajoute 9,85 % de stockage à la base.](assets/reprise-performance-fr.svg)
 
 | Mesure | Avant | Après | Résultat |
 |---|---:|---:|---:|
@@ -177,9 +177,10 @@ déterministes de cache et de mémoire sont des tests stricts.
 - **Livraison contrôlée.** Les branches de fonctionnalité passent les contrôles
   de PR vers `dev`, puis vers `main` stable. Une prévisualisation isolée pour
   chaque PR constitue la prochaine amélioration planifiée.
-- **Orchestré par des agents, gouverné par les contrôles.** Claude Code et Codex
-  réalisent des tâches délimitées conformément aux contrats écrits. Les tests
-  et les contrôles, non la confiance générée, autorisent la fusion.
+- **Les outils accompagnent le travail ; les contrôles valident le résultat.**
+  Claude Code et Codex aident à réaliser des tâches clairement délimitées à
+  partir d’exigences écrites. Une modification n’est fusionnée qu’après la
+  réussite des tests et contrôles qualité requis.
 
 ## Feuille de route : le même cœur au-delà du lecteur actuel
 

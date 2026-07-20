@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
-  <title id="title">Reprise three-crate architecture</title>
-  <desc id="description">The shipping GTK and libadwaita frontend uses the portable Reprise core and the Linux platform adapter. Future native frontends can reuse the core through narrow contracts. The Linux adapter implements playback, media integration, and device seams defined by the core.</desc>
+  <title id="title">Arquitectura Reprise de tres crates</title>
+  <desc id="description">El frontend GTK y libadwaita disponible usa el core portable de Reprise y el adaptador Linux. Los futuros frontends nativos reutilizan el core mediante contratos estrechos. El adaptador Linux implementa las interfaces de reproducción, integración multimedia y dispositivos definidas por el core.</desc>
 
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
@@ -64,10 +64,10 @@
       <rect x="40" y="4" width="6" height="34" rx="3" fill="#33c9a3"/>
     </g>
     <text x="142" y="84" class="eyebrow" fill="#e7e9ec">REPRISE</text>
-    <text x="142" y="108" class="small" fill="#94a3b8">THREE-CRATE WORKSPACE</text>
+    <text x="142" y="108" class="small" fill="#94a3b8">WORKSPACE DE TRES CRATES</text>
 
-    <text x="76" y="174" class="title" fill="#f8fafc">Native where it matters.</text>
-    <text x="76" y="208" class="subtitle" fill="#aab6c8">A portable music engine behind explicit frontend and platform seams.</text>
+    <text x="76" y="174" class="title" fill="#f8fafc">Nativo donde importa.</text>
+    <text x="76" y="208" class="subtitle" fill="#aab6c8">Un motor musical portable tras límites claros de frontend y plataforma.</text>
 
     <!-- Frontend cards -->
     <g filter="url(#shadow)">
@@ -76,16 +76,16 @@
     </g>
 
     <rect x="108" y="292" width="86" height="28" rx="14" fill="#57e0bf" fill-opacity="0.16" stroke="#57e0bf" stroke-opacity="0.48"/>
-    <text x="151" y="311" class="pill" text-anchor="middle" fill="#74f0d0">SHIPPING</text>
+    <text x="151" y="311" class="pill" text-anchor="middle" fill="#74f0d0">DISPONIBLE</text>
     <text x="108" y="357" class="crate mono" fill="#f8fafc">reprise-gnome</text>
-    <text x="108" y="389" class="card-title" fill="#dbeafe">Native GNOME frontend</text>
-    <text x="108" y="419" class="body" fill="#aebdd0">GTK4 · libadwaita · interaction and presentation</text>
+    <text x="108" y="389" class="card-title" fill="#dbeafe">Frontend GNOME nativo</text>
+    <text x="108" y="419" class="body" fill="#aebdd0">GTK4 · libadwaita · interacción y presentación</text>
 
     <rect x="796" y="292" width="84" height="28" rx="14" fill="#94a3b8" fill-opacity="0.12" stroke="#94a3b8" stroke-opacity="0.36"/>
-    <text x="838" y="311" class="pill" text-anchor="middle" fill="#aeb8c7">PLANNED</text>
-    <text x="796" y="357" class="crate" fill="#e2e8f0">Future native frontends</text>
-    <text x="796" y="389" class="card-title" fill="#cbd5e1">Separate products, shared engine</text>
-    <text x="796" y="419" class="body" fill="#94a3b8">macOS · Windows · mobile</text>
+    <text x="838" y="311" class="pill" text-anchor="middle" fill="#aeb8c7">PLANIFICADO</text>
+    <text x="796" y="357" class="crate" fill="#e2e8f0">Futuros frontends nativos</text>
+    <text x="796" y="389" class="card-title" fill="#cbd5e1">Productos distintos, motor compartido</text>
+    <text x="796" y="419" class="body" fill="#94a3b8">macOS · Windows · móvil</text>
 
     <!-- Dependency connectors -->
     <path d="M240 446V518" fill="none" stroke="#62a0ea" stroke-width="3" marker-end="url(#arrow-blue)"/>
@@ -94,9 +94,9 @@
 
     <g>
       <rect x="197" y="469" width="86" height="28" rx="14" fill="#0d1521" stroke="#294667"/>
-      <text x="240" y="488" class="line-label" text-anchor="middle" fill="#8fbff5">USES</text>
+      <text x="240" y="488" class="line-label" text-anchor="middle" fill="#8fbff5">USA</text>
       <rect x="859" y="469" width="94" height="28" rx="14" fill="#0d1521" stroke="#294667"/>
-      <text x="906" y="488" class="line-label" text-anchor="middle" fill="#8fbff5">REUSES</text>
+      <text x="906" y="488" class="line-label" text-anchor="middle" fill="#8fbff5">REUTILIZA</text>
     </g>
 
     <!-- Engine and adapter cards -->
@@ -106,21 +106,21 @@
     </g>
 
     <rect x="108" y="564" width="126" height="28" rx="14" fill="#62a0ea" fill-opacity="0.13" stroke="#62a0ea" stroke-opacity="0.42"/>
-    <text x="171" y="583" class="pill" text-anchor="middle" fill="#8fbff5">LINUX ADAPTER</text>
+    <text x="171" y="583" class="pill" text-anchor="middle" fill="#8fbff5">ADAPTADOR LINUX</text>
     <text x="108" y="630" class="crate mono" fill="#f8fafc">reprise-platform-linux</text>
-    <text x="108" y="666" class="body" fill="#b8c6d8">GStreamer playback · MPRIS / D-Bus</text>
-    <text x="108" y="695" class="body" fill="#b8c6d8">MTP devices · Trash and host integration</text>
+    <text x="108" y="666" class="body" fill="#b8c6d8">Reproducción GStreamer · MPRIS / D-Bus</text>
+    <text x="108" y="695" class="body" fill="#b8c6d8">Dispositivos MTP · Papelera e integración host</text>
     <rect x="108" y="728" width="460" height="32" rx="10" fill="#0d1521"/>
-    <text x="125" y="750" class="small" fill="#8fbff5">implements the contracts owned by reprise-core</text>
+    <text x="125" y="750" class="small" fill="#8fbff5">implementa los contratos de reprise-core</text>
 
     <rect x="796" y="564" width="128" height="28" rx="14" fill="#57e0bf" fill-opacity="0.14" stroke="#57e0bf" stroke-opacity="0.46"/>
-    <text x="860" y="583" class="pill" text-anchor="middle" fill="#74f0d0">PORTABLE ENGINE</text>
+    <text x="860" y="583" class="pill" text-anchor="middle" fill="#74f0d0">MOTOR PORTABLE</text>
     <text x="796" y="630" class="crate mono" fill="#f8fafc">reprise-core</text>
-    <text x="796" y="667" class="body" fill="#c9e7df">Library + SQLite · queue + playlists</text>
-    <text x="796" y="696" class="body" fill="#c9e7df">Scanning + covers · settings + synchronization</text>
-    <text x="796" y="725" class="body" fill="#c9e7df">Optional modules · playback and media contracts</text>
+    <text x="796" y="667" class="body" fill="#c9e7df">Biblioteca + SQLite · cola + playlists</text>
+    <text x="796" y="696" class="body" fill="#c9e7df">Escaneo + portadas · ajustes + sincronización</text>
+    <text x="796" y="725" class="body" fill="#c9e7df">Módulos opcionales · contratos de playback y media</text>
     <rect x="796" y="744" width="522" height="24" rx="8" fill="#57e0bf" fill-opacity="0.1"/>
-    <text x="812" y="761" class="small" fill="#74f0d0">GUI-free · platform-neutral · independently testable</text>
+    <text x="812" y="761" class="small" fill="#74f0d0">Sin GUI · multiplataforma · testeable por separado</text>
 
     <!-- Adapter implements the core's seams -->
     <path d="M676 660H744" fill="none" stroke="#57e0bf" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#arrow-green)"/>
@@ -129,7 +129,7 @@
     <g transform="translate(76 824)">
       <circle cx="9" cy="8" r="7" fill="#57e0bf" opacity="0.18"/>
       <path d="M5 8l3 3 6-7" fill="none" stroke="#74f0d0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="28" y="14" class="small" fill="#aebccf">Enforced boundary: reprise-core has no GTK, libadwaita, GStreamer or zbus dependency.</text>
+      <text x="28" y="14" class="small" fill="#aebccf">Límite impuesto: reprise-core no depende de GTK, libadwaita, GStreamer ni zbus.</text>
     </g>
   </g>
 </svg>
