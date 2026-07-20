@@ -170,9 +170,9 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 - **Controlled delivery.** Feature branches pass pull-request gates into
   `dev`, then stable `main`. Isolated previews for every PR are the next
   planned delivery improvement.
-- **Agent-orchestrated, gate-controlled.** Claude Code and Codex implement
-  bounded tasks against the written contracts. Tests and gates, not generated
-  confidence, are the merge authority.
+- **Tools support the workflow; checks decide.** Claude Code and Codex help
+  implement clearly scoped tasks based on written requirements. A change is
+  merged only after the relevant tests and quality checks pass.
 
 ## Roadmap: the same core beyond today’s player
 
