@@ -24,6 +24,18 @@ for readme in README.md README.de.md; do
   fi
 done
 
+rg -Fq '## Architecture goals' README.md
+rg -Fq '## Architekturziele' README.de.md
+rg -Fq 'Thin native frontends' README.md
+rg -Fq 'Schlanke native Frontends' README.de.md
+rg -Fq 'MCP and CLI adapters' README.md
+rg -Fq 'MCP- und CLI-Adapter' README.de.md
+
+if rg -q 'analysis-driven visuals|generative audio \+ visuals|\| \*\*Distribution\*\*' README.md ||
+  rg -q 'analysebasierte Visuals|generatives Audio \+ Visuals|\| \*\*Distribution\*\*' README.de.md; then
+  fail "architecture goals must contain architecture directions only"
+fi
+
 if rg -qi 'engineering at a glance|engineering auf einen blick|reprise-engineering-at-a-glance' \
   README.md README.de.md ||
   find assets -maxdepth 1 -type f -name 'reprise-engineering-at-a-glance*.svg' -print -quit | rg -q .; then

@@ -174,21 +174,23 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
   Übernommen wird eine Änderung erst, wenn alle relevanten Tests und
   Qualitätsprüfungen bestanden sind.
 
-## Roadmap: derselbe Core über den heutigen Player hinaus
+## Architekturziele
 
-Die folgenden Punkte sind Architekturziele, keine ausgelieferten Features.
+Reprise soll über die heutige GNOME-App hinauswachsen können, ohne zur
+gemeinsamen Web-Shell zu werden oder Produktregeln zu duplizieren. Daraus
+folgen zwei Richtungen:
 
-| Richtung | Geplante Naht | Nicht verhandelbare Grenze |
-|---|---|---|
-| **In Entwicklung — analysebasierte Visuals** | Lokale Audio-Evidenz und Klangprofile steuern einen nativen Renderer | Begrenzte Arbeit, kein Blockieren des Audio-Threads, High-Contrast-Fallback, Reduced Motion/Off gewinnt |
-| **Architektur als Nächstes — MCP + CLI** | Schlanke Adapter nutzen eine gemeinsame Rust-Anwendungsschicht für Bibliothek, Playlists, Queue und Playback | Dasselbe getestete Verhalten in jedem Adapter; explizite Capabilities, standardmäßig read-only, keine Pfad-/Credential-Leaks |
-| **Explorativ — generatives Audio + Visuals** | Providerneutrale optionale Module für KI-Visuals, neue Songs, Instrumentals, Remixes und Genre-Transformation | Klare Herkunft und explizite Benutzeraktion; niemals stille Bibliotheksmutation |
-| **Schlanke native Frontends** | SwiftUI, WinUI, Mobile oder ein anderes Linux-Toolkit nutzt den MIT-Rust-Core und liefert Plattformimplementierungen | Native Interaktionsmuster statt UI auf dem kleinsten gemeinsamen Nenner |
-| **Distribution** | Flatpak-/Flathub-Paketierung, vollständiges gettext und reale GNOME-Abnahme | Kein Release-Claim ohne Packaging-, Übersetzungs-, Display-, Audio-, Portal- und Hardware-Evidenz |
+- **Schlanke native Frontends.** Eine künftige App für macOS, Windows, Mobile
+  oder ein anderes Linux-Toolkit soll den Rust-Core wiederverwenden, aber die
+  Interaktionsmuster und Plattformdienste ihres Systems selbst umsetzen.
+- **MCP- und CLI-Adapter.** Bibliothek, Playlists, Queue und Wiedergabe sollen
+  über schmale Adapter dieselbe getestete Anwendungsschicht nutzen. Fähigkeiten
+  bleiben explizit, standardmäßig read-only und dürfen weder lokale Pfade noch
+  Credentials versehentlich preisgeben.
 
-Das vorhandene Modulregister und die Playback-/Media-/Waveform-Verträge sind
-die Ausgangsnähte. Experimentelles KI- und Agent-Verhalten bleibt außerhalb
-des Core-Domänenmodells, bis Interfaces und Sicherheitsregeln bewiesen sind.
+Das sind Architekturziele, keine ausgelieferten Features. Ihr Wert liegt in
+einem gemeinsamen Domänenmodell, ohne native UX oder Sicherheitsgrenzen zu
+opfern.
 
 ## Quelltext und Kontakt
 
