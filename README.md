@@ -170,21 +170,21 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
   implement clearly scoped tasks based on written requirements. A change is
   merged only after the relevant tests and quality checks pass.
 
-## Roadmap: the same core beyond today’s player
+## Architecture goals
 
-The following are architectural directions, not shipped features.
+Reprise should grow beyond the current GNOME app without turning into a shared
+web shell or duplicating product rules. Two directions follow from that idea:
 
-| Direction | Intended seam | Non-negotiable constraint |
-|---|---|---|
-| **In development — analysis-driven visuals** | Local audio evidence and sound profiles drive a native renderer | Bounded work, no audio-thread blocking, high-contrast fallback, reduced-motion/off wins |
-| **Architecture next — MCP + CLI** | Thin adapters use one shared Rust application layer for library, playlist, queue, and playback behavior | Same tested behavior in every adapter; explicit capabilities, read-only by default, no path/credential leakage |
-| **Exploratory — generative audio + visuals** | Provider-neutral optional modules for AI visuals, new songs, instrumentals, remixes, and genre transformation | Provenance and explicit user action; never silent library mutation |
-| **Thin native frontends** | SwiftUI, WinUI, mobile, or another Linux toolkit reuses the MIT Rust core and supplies platform implementations | Native interaction patterns instead of lowest-common-denominator UI |
-| **Distribution** | Flatpak/Flathub packaging, gettext completion, and a real GNOME release pass | No release claim before package, translation, display, audio, portal, and hardware evidence is complete |
+- **Thin native frontends.** A future macOS, Windows, mobile, or alternative
+  Linux app should reuse the Rust core while implementing the interaction
+  patterns and platform services that belong on its host.
+- **MCP and CLI adapters.** Library, playlist, queue, and playback capabilities
+  should be available through narrow adapters over the same tested application
+  layer. Capabilities stay explicit, read-only by default, and must not expose
+  local paths or credentials by accident.
 
-The existing module registry and playback/media/waveform contracts are the
-starting seams. Experimental AI and agent behavior stays outside the core
-domain model until those interfaces and safety rules are proven.
+These are architecture goals, not shipped features. Their value is reuse of
+one domain model without sacrificing native UX or weakening its safety rules.
 
 ## Source and contact
 
