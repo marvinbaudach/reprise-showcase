@@ -7,19 +7,19 @@
 
 <p><strong>Ein nativer GTK4-/libadwaita-Musikplayer für GNOME in Rust — und ein Testfeld für einen portablen Core mit schlanken nativen Frontends.</strong></p>
 
-<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-Edition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust Edition 2021">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/Produktcode-58.1k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="58.1k Zeilen Produktcode">
-  <img src="https://img.shields.io/badge/Testcode-30.7k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="30.7k Zeilen Testcode">
-  <img src="https://img.shields.io/badge/Tests-1%2C482%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="1.482 bestandene Tests">
+  <img src="https://img.shields.io/badge/Produktcode-80.4k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="80.400 Zeilen Produktcode">
+  <img src="https://img.shields.io/badge/Testcode-45.5k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="45.500 Zeilen Testcode">
+  <img src="https://img.shields.io/badge/Tests-1%2C903%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="1.903 bestandene Tests">
   <img src="https://img.shields.io/badge/Clippy-0%20Warnungen-22262b?style=flat-square&labelColor=16181b" alt="Clippy: 0 Warnungen">
   <img src="https://img.shields.io/badge/Status-aktiv-33c9a3?style=flat-square&labelColor=16181b" alt="Status: aktiv">
 </p>
 
-<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 20. Juli 2026</sub></p>
+<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 21. Juli 2026</sub></p>
 
 </div>
 
@@ -29,10 +29,6 @@ und eine enge GNOME-Integration. Gleichzeitig ist das Produkt ein
 Architekturexperiment: Das Domänenverhalten lebt in einem plattformneutralen
 Rust-Core; jede Plattform soll nur eine kleine, wirklich native UI- und
 Integrationsschicht ergänzen.
-
-## Engineering auf einen Blick
-
-![Reprise auf einen Blick: ausgelieferte Produkttiefe, verbindliche Engineering-Qualität, kontrollierte Auslieferung und eine klar gestufte Roadmap.](assets/reprise-engineering-at-a-glance-de.svg)
 
 ## Oberfläche
 
@@ -77,7 +73,7 @@ Integrationsschicht ergänzen.
 
 ## Architektur: ein Core, native Ränder
 
-![Reprise-Architektur: Das native GNOME-Frontend und künftige Frontends nutzen einen portablen Core; ein separater Linux-Adapter liefert GStreamer, MPRIS, MTP und Host-Integration.](assets/reprise-architecture-de.svg)
+![Reprise-Architektur: Das GTK-Frontend sendet Befehle und Queries an den portablen Core; der Linux-Adapter implementiert dessen Playback-, Medien-, Geräte- und Analyseverträge; GUI- und Host-Abhängigkeiten sind im Core mechanisch verboten.](assets/reprise-architecture-de.svg)
 
 | Crate | Verantwortung | Erzwungene Grenze |
 |---|---|---|
@@ -102,7 +98,7 @@ Die erste benchmarkgetriebene Optimierung ersetzte Full Scan plus temporäre
 Sortierung durch einen partiellen `NOCASE`-Titelindex. Der akzeptierte
 Same-Host-Vergleich mit 100.000 Tracks maß:
 
-![Reprise-Performance bei 100.000 Tracks: Das letzte Titelfenster wurde um 97,51 Prozent schneller, die Playback-ID-Projektion um 96,33 Prozent; der Cache bleibt auf acht SQL-Fenster und 1.600 Zeilen begrenzt, der Index kostet 9,85 Prozent zusätzlichen Datenbankspeicher.](assets/reprise-performance-de.svg)
+![Reprise-Performance bei 100.000 Tracks: Ein partieller Titelindex ohne Beachtung der Groß-/Kleinschreibung ersetzt Full Scan und temporäre Sortierung, beschleunigt das letzte Titelfenster um den Faktor 40,2 und die Playback-ID-Projektion um 96,33 Prozent; dafür wächst die Datenbank um 9,85 Prozent.](assets/reprise-performance-de.svg)
 
 | Messung | Vorher | Nachher | Ergebnis |
 |---|---:|---:|---:|
@@ -135,13 +131,13 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 
 | Metrik | Aktuelle Evidenz |
 |---|---:|
-| Rust-Code | 88.789 Zeilen |
-| — Produktcode | 58.053 Zeilen |
-| — Testcode | 30.736 Zeilen |
-| Workspace-Gate | 1.482 bestandene Tests: 758 Core · 669 GNOME · 55 Linux-Plattform |
-| Tests mit kontrollierten Bedingungen | 139 vom Standardlauf getrennt, darunter 138 GNOME-Display-/Host-Tests |
-| UX-Verträge | 60 aktive Regeln; jede braucht einen regelbenannten Test |
-| Qualitätsgates | 12 harte Merge-Gates plus Release-/Packaging-Prüfungen |
+| Rust-Code | 125.878 Zeilen |
+| — Produktcode | 80.385 Zeilen |
+| — Testcode | 45.493 Zeilen |
+| Workspace-Gate | 1.903 bestandene Tests: 996 Core · 830 GNOME · 77 Linux-Plattform |
+| Tests mit kontrollierten Bedingungen | 229 vom Standardlauf getrennt: 228 GNOME-Display-/Host-Tests · 1 Linux-Benchmark |
+| UX-Verträge | 164 aktive Regeln; jede braucht einen regelbenannten Test |
+| Qualitätsgates | Vollständige Merge-Readiness- und Release-/Packaging-Gates bestanden |
 
 <sub>Die Rust-Zeilen wurden beim Abschluss der Performance-Arbeit mit dem reproduzierbaren, <code>#[cfg(test)]</code>-fähigen Analyzer des Bewerbungs-/CV-Repositories auf dem committeten Stand gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor; Produkt- und Testcode werden getrennt ausgewiesen.</sub>
 
@@ -150,7 +146,7 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 - **Spec- und testgetrieben.** Wesentliche Arbeit beginnt mit schriftlichen
   Entscheidungen und einem Taskplan. Jeder Task durchläuft Red/Green, einen
   adversarial Diff-Review und einen eigenen Commit.
-- **Zwölf harte Merge-Gates.** Formatting, striktes All-Target-Clippy,
+- **Ein vollständiges Merge-Readiness-Gate.** Formatting, striktes All-Target-Clippy,
   warnungsfreies Rustdoc, vollständige Workspace-Tests, Dependency-Audit,
   Architektur-Policy, UX-Traceability, Motion-Tokens sowie isolierte Display-/
   CSS-Prüfungen laufen gemeinsam.

@@ -7,19 +7,19 @@
 
 <p><strong>A native GTK4 / libadwaita music player for GNOME, written in Rust — and a test bed for one portable core with thin native frontends.</strong></p>
 
-<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.it.md">Italiano</a> · <a href="README.es.md">Español</a></p>
+<p><a href="README.md">English</a> · <a href="README.de.md">Deutsch</a></p>
 
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/product%20code-58.1k%20lines-22262b?style=flat-square&labelColor=16181b" alt="58.1k lines of product code">
-  <img src="https://img.shields.io/badge/test%20code-30.7k%20lines-22262b?style=flat-square&labelColor=16181b" alt="30.7k lines of test code">
-  <img src="https://img.shields.io/badge/tests-1%2C482%20passing-22262b?style=flat-square&labelColor=16181b" alt="1,482 passing tests">
+  <img src="https://img.shields.io/badge/product%20code-80.4k%20lines-22262b?style=flat-square&labelColor=16181b" alt="80.4k lines of product code">
+  <img src="https://img.shields.io/badge/test%20code-45.5k%20lines-22262b?style=flat-square&labelColor=16181b" alt="45.5k lines of test code">
+  <img src="https://img.shields.io/badge/tests-1%2C903%20passing-22262b?style=flat-square&labelColor=16181b" alt="1,903 passing tests">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
-<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 20 July 2026</sub></p>
+<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 21 July 2026</sub></p>
 
 </div>
 
@@ -28,10 +28,6 @@ serious metadata tooling, listening statistics, Android sync, and tight GNOME
 integration. The product is also an architecture experiment: domain behavior
 lives in a platform-neutral Rust core, while every platform should keep a
 small, genuinely native UI and integration layer.
-
-## Engineering at a glance
-
-![Reprise at a glance: shipped product depth, enforced engineering quality, controlled delivery, and a clearly staged roadmap.](assets/reprise-engineering-at-a-glance.svg)
 
 ## Interface
 
@@ -76,7 +72,7 @@ small, genuinely native UI and integration layer.
 
 ## Architecture: one core, native edges
 
-![Reprise architecture: the native GNOME frontend and future frontends reuse a portable core, while a separate Linux adapter provides GStreamer, MPRIS, MTP, and host integration.](assets/reprise-architecture.svg)
+![Reprise architecture: the GTK frontend sends commands and queries to the portable core; the Linux adapter implements the core's playback, media, device, and analysis contracts; GUI and host dependencies are mechanically forbidden in the core.](assets/reprise-architecture.svg)
 
 | Crate | Responsibility | Enforced boundary |
 |---|---|---|
@@ -100,7 +96,7 @@ The first benchmark-driven optimization replaced a full scan plus temporary
 sort with a partial `NOCASE` title index. The accepted same-host 100,000-track
 comparison measured:
 
-![Reprise performance at 100,000 tracks: the final title window improved by 97.51 percent, playback-ID projection improved by 96.33 percent, the track-list cache stays bounded to eight SQL windows and 1,600 rows, and the index adds 9.85 percent database storage.](assets/reprise-performance.svg)
+![Reprise performance at 100,000 tracks: a partial case-insensitive title index replaces a full scan and temporary sort, making the final title window 40.2 times faster and playback-ID projection 96.33 percent faster at a 9.85 percent database-storage cost.](assets/reprise-performance.svg)
 
 | Measurement | Before | After | Result |
 |---|---:|---:|---:|
@@ -132,13 +128,13 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 | Metric | Current evidence |
 |---|---:|
-| Rust code | 88,789 lines |
-| — product code | 58,053 lines |
-| — test code | 30,736 lines |
-| Workspace gate | 1,482 passing tests: 758 core · 669 GNOME · 55 Linux platform |
-| Controlled-condition tests | 139 separated from the default run, including 138 GNOME display/host tests |
-| UX contracts | 60 active rules, each requiring a rule-named test |
-| Quality gates | 12 hard merge gates plus release/package checks |
+| Rust code | 125,878 lines |
+| — product code | 80,385 lines |
+| — test code | 45,493 lines |
+| Workspace gate | 1,903 passing tests: 996 core · 830 GNOME · 77 Linux platform |
+| Controlled-condition tests | 229 separated from the default run: 228 GNOME display/host tests · 1 Linux benchmark |
+| UX contracts | 164 active rules, each requiring a rule-named test |
+| Quality gates | Full merge-readiness and release/package gates pass |
 
 <sub>Rust lines were counted on the committed performance close-out with the reproducible, <code>#[cfg(test)]</code>-aware analyzer used by the application/CV repository. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
 
@@ -147,7 +143,7 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 - **Spec- and test-driven.** Substantial work starts from written decisions and
   a task plan. Each task follows a red/green loop and gets an adversarial diff
   review before its dedicated commit.
-- **Twelve hard merge gates.** Formatting, strict all-target Clippy, warning-
+- **One complete merge-readiness gate.** Formatting, strict all-target Clippy, warning-
   free Rustdoc, the full workspace suite, dependency audit, architecture
   policy, UX traceability, motion tokens, and isolated display/CSS checks are
   enforced together.
