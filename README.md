@@ -34,27 +34,27 @@ small, genuinely native UI and integration layer.
 <table>
   <tr>
     <td width="50%">
-      <img src="assets/shot-01.png" alt="Track library with sortable columns and metadata panel">
-      <p align="center"><sub>Track library — sortable persisted columns, metadata panel, library health</sub></p>
+      <img src="assets/shot-library.png" alt="Track library filtered by a search term, with persisted sortable columns, a playing track and the up-next queue">
+      <p align="center"><sub>Library — any-field filter over 1,702 tracks, persisted sortable columns, live queue</sub></p>
     </td>
     <td width="50%">
-      <img src="assets/shot-02.png" alt="Album grid with detail panel and cover-derived player accent">
-      <p align="center"><sub>Album grid — detail panel, player accent derived from the cover art</sub></p>
+      <img src="assets/shot-visuals.png" alt="Now Playing panel showing audio-reactive bars rendered from the live playback spectrum">
+      <p align="center"><sub>Song Visuals — audio-reactive panel driven by the live playback spectrum</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src="assets/shot-03.png" alt="Artist page with albums and top tracks">
-      <p align="center"><sub>Artist pages — albums, top tracks, play history</sub></p>
+      <img src="assets/shot-stats.png" alt="My Stats page with listening hours, weekly activity chart, most played band and most played songs">
+      <p align="center"><sub>My Stats — listening hours, best week, most played band and songs</sub></p>
     </td>
     <td width="50%">
-      <img src="assets/shot-04.png" alt="Listening statistics with top artists and activity chart">
-      <p align="center"><sub>My Stats — listening hours, top artists and albums, activity chart</sub></p>
+      <img src="assets/shot-settings.png" alt="Preferences dialog on the Plugins page, showing local features and online integrations as individual opt-in switches">
+      <p align="center"><sub>Preferences — every online integration is a separate opt-in module</sub></p>
     </td>
   </tr>
 </table>
 
-<p align="center"><sub>Design-system previews, not fabricated runtime screenshots. Captures of the running app will replace them after the native GNOME visual pass.</sub></p>
+<p align="center"><sub>Captures of the running app on GNOME (dark, default <em>Perpetual Rain</em> theme), taken against a real 1,702-track library.</sub></p>
 
 ## Product surface
 
