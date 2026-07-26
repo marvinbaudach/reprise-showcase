@@ -35,27 +35,27 @@ Integrationsschicht ergänzen.
 <table>
   <tr>
     <td width="50%">
-      <img src="assets/shot-01.png" alt="Track-Bibliothek mit sortierbaren Spalten und Metadatenpanel">
-      <p align="center"><sub>Track-Bibliothek — persistente sortierbare Spalten, Metadatenpanel, Bibliothekszustand</sub></p>
+      <img src="assets/shot-library.png" alt="Track-Bibliothek mit aktivem Suchfilter, persistenten sortierbaren Spalten, laufendem Track und Warteschlange">
+      <p align="center"><sub>Bibliothek — Filter über alle Felder in 1.702 Tracks, persistente sortierbare Spalten, live Warteschlange</sub></p>
     </td>
     <td width="50%">
-      <img src="assets/shot-02.png" alt="Albumraster mit Detailpanel und Cover-Akzent">
-      <p align="center"><sub>Albumraster — Detailpanel und aus dem Cover abgeleiteter Player-Akzent</sub></p>
+      <img src="assets/shot-visuals.png" alt="Now-Playing-Panel mit audioreaktiven Balken aus dem laufenden Wiedergabespektrum">
+      <p align="center"><sub>Song Visuals — audioreaktives Panel aus dem laufenden Wiedergabespektrum</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <img src="assets/shot-03.png" alt="Artist-Seite mit Alben und Top-Tracks">
-      <p align="center"><sub>Artist-Seiten — Alben, Top-Tracks und Hörverlauf</sub></p>
+      <img src="assets/shot-stats.png" alt="My-Stats-Seite mit Hörstunden, Wochenverlauf, meistgespielter Band und meistgespielten Songs">
+      <p align="center"><sub>My Stats — Hörstunden, beste Woche, meistgespielte Band und Songs</sub></p>
     </td>
     <td width="50%">
-      <img src="assets/shot-04.png" alt="Hörstatistik mit Top-Artists und Aktivitätsdiagramm">
-      <p align="center"><sub>My Stats — Hörstunden, Top-Artists und -Alben, Aktivitätsdiagramm</sub></p>
+      <img src="assets/shot-settings.png" alt="Einstellungsdialog auf der Plugins-Seite: lokale Funktionen und Online-Integrationen als einzeln aktivierbare Schalter">
+      <p align="center"><sub>Einstellungen — jede Online-Integration ist ein eigenes, freiwillig aktiviertes Modul</sub></p>
     </td>
   </tr>
 </table>
 
-<p align="center"><sub>Designsystem-Previews, keine erfundenen Laufzeit-Screenshots. Aufnahmen der laufenden App ersetzen sie nach der nativen GNOME-Sichtprüfung.</sub></p>
+<p align="center"><sub>Aufnahmen der laufenden App unter GNOME (dunkel, Standard-Theme <em>Perpetual Rain</em>), gegen eine echte Bibliothek mit 1.702 Tracks.</sub></p>
 
 ## Heutiger Produktumfang
 
