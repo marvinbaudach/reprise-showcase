@@ -14,14 +14,14 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/product%20code-80.4k%20lines-22262b?style=flat-square&labelColor=16181b" alt="80.4k lines of product code">
-  <img src="https://img.shields.io/badge/test%20code-45.5k%20lines-22262b?style=flat-square&labelColor=16181b" alt="45.5k lines of test code">
-  <img src="https://img.shields.io/badge/tests-1%2C903%20passing-22262b?style=flat-square&labelColor=16181b" alt="1,903 passing tests">
+  <img src="https://img.shields.io/badge/product%20code-108.1k%20lines-22262b?style=flat-square&labelColor=16181b" alt="108.1k lines of product code">
+  <img src="https://img.shields.io/badge/test%20code-67.2k%20lines-22262b?style=flat-square&labelColor=16181b" alt="67.2k lines of test code">
+  <img src="https://img.shields.io/badge/tests-2%2C693%20passing-22262b?style=flat-square&labelColor=16181b" alt="2,693 passing tests">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
-<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 21 July 2026</sub></p>
+<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 27 July 2026</sub></p>
 
 </div>
 
@@ -62,15 +62,18 @@ small, genuinely native UI and integration layer.
 
 | Area | Built |
 |---|---|
-| Library | SQLite-backed catalog, virtualized Tracks/Albums/Artists views, incremental scans, live watching, move and missing-file detection |
-| Playback | GStreamer pipeline with gapless, crossfade, ten-band equalizer, ReplayGain, queue, shuffle/repeat, and waveform seeking |
-| Metadata | Multi-track tag editor that writes only changed fields, MusicBrainz lookup, embedded/folder/online covers |
-| Search and organization | Full-field search, filter chips, persistent custom columns, manual/smart playlists, M3U import/export |
-| Lyrics and discovery | Synchronized/static lyrics, cached LRCLIB lookup, optional artist and album news |
-| Desktop | MPRIS media keys, quick settings, notifications, lock-screen metadata, themes, cover-derived accent |
-| Devices | Android MTP browsing and delta sync with progress, cancellation, playlists, and optional Opus transcoding |
-| Services | Independent default-off ListenBrainz and Last.fm modules with keyring credentials and durable offline queues |
-| Migration and safety | One-shot Rhythmbox import, no-autoplay session restore, missing/import issue flows, database-only remove, confirmed Trash |
+| Library | SQLite-backed catalog, a virtualized track table with album/artist/genre scopes, rolling Recently Added, incremental scans, live watching, and move/missing detection |
+| Playback and visuals | GStreamer gapless/crossfade, equalizer, ReplayGain, queue, shuffle/repeat, waveform seeking, and 64 neon bars driven by a pre-ReplayGain CAVA PCM pipeline |
+| Metadata and covers | Multi-track editing that writes only changed fields, MusicBrainz lookup, embedded/folder/Cover Art Archive covers, and album-wide cover consistency without writing music files |
+| Search and organization | Full-field search, filter chips, persistent custom columns including Added, manual/smart playlists, and M3U import/export |
+| Stats and lyrics | A period-aware listening story with trends, best week, bands, songs and genres; synchronized/static lyrics with cached LRCLIB lookup |
+| Podcasts and radio | RSS and YouTube subscriptions, conditional refresh/downloads, resume and played state, reversible episode removal, plus Radio Browser/manual stations with external playback and MPRIS |
+| Concerts and releases | Opt-in concert and new-release discovery with persisted filters, background refresh, dedicated views, and one shared Updates surface |
+| Desktop and services | MPRIS media keys, quick settings, notifications, lock-screen metadata, themes, cover-derived accent, and independent ListenBrainz/Last.fm modules with keyring credentials and offline queues |
+| Android devices | Playlist-mirroring MTP delta sync with storage/speed/progress, cancellation, safe managed-root removals, and optional 256 kbit/s Opus transcoding |
+| Instrumental versions | Experimental opt-in stem separation through a separately packaged worker, with verified runtime readiness, staging previews, save/discard flows, and durable AI provenance |
+| CLI and MCP adapters | Headless library/search/playlist/scan/instrumental commands plus capability-gated, path-safe MCP access to playlists, sources, discovery, device sync, instrumentals, and optional playback |
+| Migration and safety | One-shot Rhythmbox import, no-autoplay session restore, missing/import issue flows, database-only remove, and confirmed Trash |
 
 ## Architecture: one core, native edges
 
@@ -81,6 +84,9 @@ small, genuinely native UI and integration layer.
 | `reprise-core` | Library, database facades, queue semantics, playlists, settings, modules, and platform contracts | No GTK, libadwaita, GStreamer, zbus, or GLib dependencies |
 | `reprise-gnome` | GTK4/libadwaita composition, native interactions, accessibility, theming, and presentation | No productive SQL, blocking HTTP, direct GStreamer coupling, or unreviewed unsafe code |
 | `reprise-platform-linux` | Linux implementations for audio, media integration, devices, waveform extraction, and Trash | Implements the core contracts; UI code receives interfaces |
+| `reprise-cli` | Headless commands over core facades for library, playlists, scanning, and instrumental jobs | No GUI dependencies or duplicated product rules |
+| `reprise-mcp` | Local stdio tools and path-safe resources with explicit read/write capabilities | No productive SQL, implicit mutation, path leakage, or credential leakage |
+| `reprise-stems` | Portable stem-separation engine and verified model/runtime provisioning | No GUI, database, or playback coupling |
 
 This is deliberately not a shared web shell. The Rust core owns data and
 behavior; platform-specific frontends own native interaction patterns. The
@@ -130,15 +136,15 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 | Metric | Current evidence |
 |---|---:|
-| Rust code | 125,878 lines |
-| — product code | 80,385 lines |
-| — test code | 45,493 lines |
-| Workspace gate | 1,903 passing tests: 996 core · 830 GNOME · 77 Linux platform |
-| Controlled-condition tests | 229 separated from the default run: 228 GNOME display/host tests · 1 Linux benchmark |
-| UX contracts | 164 active rules, each requiring a rule-named test |
-| Quality gates | Full merge-readiness and release/package gates pass |
+| Rust code | 175,286 lines |
+| — product code | 108,095 lines |
+| — test code | 67,191 lines |
+| Standard workspace run | 2,693 passing tests; 2 Radio MCP loopback fixtures blocked by sandbox TCP permissions |
+| Controlled-condition tests | 305 GNOME display/host tests explicitly separated from the default run |
+| UX contracts | 165 active rules, each requiring a rule-named test |
+| Code gates | Formatting, strict Clippy, core purity, architecture, accessibility, input, motion, UX traceability, and audit pass on the counted `dev` line |
 
-<sub>Rust lines were counted on the committed performance close-out with the reproducible, <code>#[cfg(test)]</code>-aware analyzer used by the application/CV repository. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
+<sub>Rust lines were counted from committed Reprise <code>dev</code> commit <code>144672eaefed5a8b7b8fc5e3eb6e2d54a08fae0d</code> with cloc 2.08 and the reproducible <code>#[cfg(test)]</code>-aware analyzer. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
 
 ## Engineering practice
 
@@ -172,21 +178,17 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
   implement clearly scoped tasks based on written requirements. A change is
   merged only after the relevant tests and quality checks pass.
 
-## Architecture goals
+## Architecture direction
 
-Reprise should grow beyond the current GNOME app without turning into a shared
-web shell or duplicating product rules. Two directions follow from that idea:
+The CLI and MCP adapters now prove that Reprise can expose the same tested
+application layer without embedding the GTK frontend. Their capabilities are
+explicit, data-mutating tools default off, and responses are tested against
+local path and credential leakage.
 
-- **Thin native frontends.** A future macOS, Windows, mobile, or alternative
-  Linux app should reuse the Rust core while implementing the interaction
-  patterns and platform services that belong on its host.
-- **MCP and CLI adapters.** Library, playlist, queue, and playback capabilities
-  should be available through narrow adapters over the same tested application
-  layer. Capabilities stay explicit, read-only by default, and must not expose
-  local paths or credentials by accident.
-
-These are architecture goals, not shipped features. Their value is reuse of
-one domain model without sacrificing native UX or weakening its safety rules.
+The next architectural direction is a thin native frontend for another
+platform. It should reuse the Rust core while implementing the interaction
+patterns and platform services that belong on its host — not turn Reprise into
+a shared web shell or duplicate product rules.
 
 ## Source and contact
 
