@@ -14,8 +14,8 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/product%20code-80.4k%20lines-22262b?style=flat-square&labelColor=16181b" alt="80.4k lines of product code">
-  <img src="https://img.shields.io/badge/test%20code-45.5k%20lines-22262b?style=flat-square&labelColor=16181b" alt="45.5k lines of test code">
+  <img src="https://img.shields.io/badge/product%20code-107.7k%20lines-22262b?style=flat-square&labelColor=16181b" alt="107.7k lines of product code">
+  <img src="https://img.shields.io/badge/test%20code-66.9k%20lines-22262b?style=flat-square&labelColor=16181b" alt="66.9k lines of test code">
   <img src="https://img.shields.io/badge/tests-1%2C903%20passing-22262b?style=flat-square&labelColor=16181b" alt="1,903 passing tests">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
@@ -130,15 +130,15 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 | Metric | Current evidence |
 |---|---:|
-| Rust code | 125,878 lines |
-| — product code | 80,385 lines |
-| — test code | 45,493 lines |
+| Rust code | 174,594 lines |
+| — product code | 107,737 lines |
+| — test code | 66,857 lines |
 | Workspace gate | 1,903 passing tests: 996 core · 830 GNOME · 77 Linux platform |
 | Controlled-condition tests | 229 separated from the default run: 228 GNOME display/host tests · 1 Linux benchmark |
 | UX contracts | 164 active rules, each requiring a rule-named test |
 | Quality gates | Full merge-readiness and release/package gates pass |
 
-<sub>Rust lines were counted on the committed performance close-out with the reproducible, <code>#[cfg(test)]</code>-aware analyzer used by the application/CV repository. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
+<sub>Rust lines were counted with signed Arch package <code>cloc 2.08</code> on committed Reprise <code>dev</code> revision <code>492ea733</code>; a <code>#[cfg(test)]</code>-aware projection separates product and test code. Blank and comment-only lines are excluded.</sub>
 
 ## Engineering practice
 

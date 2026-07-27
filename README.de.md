@@ -12,8 +12,8 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-Edition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust Edition 2021">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/Produktcode-80.4k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="80.400 Zeilen Produktcode">
-  <img src="https://img.shields.io/badge/Testcode-45.5k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="45.500 Zeilen Testcode">
+  <img src="https://img.shields.io/badge/Produktcode-107.7k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="107.700 Zeilen Produktcode">
+  <img src="https://img.shields.io/badge/Testcode-66.9k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="66.900 Zeilen Testcode">
   <img src="https://img.shields.io/badge/Tests-1%2C903%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="1.903 bestandene Tests">
   <img src="https://img.shields.io/badge/Clippy-0%20Warnungen-22262b?style=flat-square&labelColor=16181b" alt="Clippy: 0 Warnungen">
   <img src="https://img.shields.io/badge/Status-aktiv-33c9a3?style=flat-square&labelColor=16181b" alt="Status: aktiv">
@@ -131,15 +131,15 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 
 | Metrik | Aktuelle Evidenz |
 |---|---:|
-| Rust-Code | 125.878 Zeilen |
-| — Produktcode | 80.385 Zeilen |
-| — Testcode | 45.493 Zeilen |
+| Rust-Code | 174.594 Zeilen |
+| — Produktcode | 107.737 Zeilen |
+| — Testcode | 66.857 Zeilen |
 | Workspace-Gate | 1.903 bestandene Tests: 996 Core · 830 GNOME · 77 Linux-Plattform |
 | Tests mit kontrollierten Bedingungen | 229 vom Standardlauf getrennt: 228 GNOME-Display-/Host-Tests · 1 Linux-Benchmark |
 | UX-Verträge | 164 aktive Regeln; jede braucht einen regelbenannten Test |
 | Qualitätsgates | Vollständige Merge-Readiness- und Release-/Packaging-Gates bestanden |
 
-<sub>Die Rust-Zeilen wurden beim Abschluss der Performance-Arbeit mit dem reproduzierbaren, <code>#[cfg(test)]</code>-fähigen Analyzer des Bewerbungs-/CV-Repositories auf dem committeten Stand gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor; Produkt- und Testcode werden getrennt ausgewiesen.</sub>
+<sub>Die Rust-Zeilen wurden mit dem signierten Arch-Paket <code>cloc 2.08</code> auf dem committeten Reprise-<code>dev</code>-Stand <code>492ea733</code> gezählt; eine <code>#[cfg(test)]</code>-fähige Projektion trennt Produkt- und Testcode. Leerzeilen und reine Kommentarzeilen bleiben außen vor.</sub>
 
 ## Engineering-Praxis
 
