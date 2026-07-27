@@ -12,14 +12,14 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-Edition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust Edition 2021">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/Produktcode-80.4k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="80.400 Zeilen Produktcode">
-  <img src="https://img.shields.io/badge/Testcode-45.5k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="45.500 Zeilen Testcode">
-  <img src="https://img.shields.io/badge/Tests-1%2C903%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="1.903 bestandene Tests">
+  <img src="https://img.shields.io/badge/Produktcode-108.1k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="108.100 Zeilen Produktcode">
+  <img src="https://img.shields.io/badge/Testcode-67.2k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="67.200 Zeilen Testcode">
+  <img src="https://img.shields.io/badge/Tests-2%2C693%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="2.693 bestandene Tests">
   <img src="https://img.shields.io/badge/Clippy-0%20Warnungen-22262b?style=flat-square&labelColor=16181b" alt="Clippy: 0 Warnungen">
   <img src="https://img.shields.io/badge/Status-aktiv-33c9a3?style=flat-square&labelColor=16181b" alt="Status: aktiv">
 </p>
 
-<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 21. Juli 2026</sub></p>
+<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 27. Juli 2026</sub></p>
 
 </div>
 
@@ -61,15 +61,18 @@ Integrationsschicht ergänzen.
 
 | Bereich | Gebaut |
 |---|---|
-| Bibliothek | SQLite-Katalog, virtualisierte Track-/Album-/Artist-Ansichten, inkrementelle Scans, Live-Watcher sowie Move- und Missing-Erkennung |
-| Wiedergabe | GStreamer mit Gapless, Crossfade, Zehnband-Equalizer, ReplayGain, Queue, Shuffle/Repeat und Waveform-Seeking |
-| Metadaten | Multi-Track-Tag-Editor, der nur geänderte Felder schreibt, MusicBrainz-Lookup, eingebettete/lokale/Online-Cover |
-| Suche und Organisation | Vollfeldsuche, Filter-Chips, persistente Spalten, manuelle/smarte Playlists, M3U-Import und -Export |
-| Lyrics und Discovery | Synchronisierte/statische Lyrics, gecachter LRCLIB-Lookup, optionale Artist- und Album-News |
-| Desktop | MPRIS-Medientasten, Quick Settings, Benachrichtigungen, Sperrbildschirm-Metadaten, Themes und Cover-Akzent |
-| Geräte | Android-MTP-Browsing und Delta-Sync mit Fortschritt, Abbruch, Playlists und optionalem Opus-Transcoding |
-| Dienste | Unabhängige, standardmäßig deaktivierte ListenBrainz-/Last.fm-Module mit Keyring-Credentials und Offline-Queues |
-| Migration und Sicherheit | Einmaliger Rhythmbox-Import, Session-Restore ohne Autoplay, Missing-/Import-Flows, nur Datenbank-Remove, bestätigter Papierkorb |
+| Bibliothek | SQLite-Katalog, virtualisierte Track-Tabelle mit Album-/Artist-/Genre-Scopes, rollierendes Recently Added, inkrementelle Scans, Live-Watcher sowie Move- und Missing-Erkennung |
+| Wiedergabe und Visuals | GStreamer mit Gapless/Crossfade, Equalizer, ReplayGain, Queue, Shuffle/Repeat, Waveform-Seeking und 64 Neon-Balken aus einer CAVA-PCM-Pipeline vor ReplayGain |
+| Metadaten und Cover | Multi-Track-Bearbeitung, die nur geänderte Felder schreibt, MusicBrainz-Lookup, eingebettete/Ordner-/Cover-Art-Archive-Cover und albumweite Cover-Konsistenz ohne Schreibzugriff auf Musikdateien |
+| Suche und Organisation | Vollfeldsuche, Filter-Chips, persistente benutzerdefinierte Spalten einschließlich Hinzugefügt, manuelle/smarte Playlists sowie M3U-Import und -Export |
+| Statistiken und Lyrics | Zeitraumbezogene Hörgeschichte mit Trends, bester Woche, Bands, Songs und Genres; synchronisierte/statische Lyrics mit gecachtem LRCLIB-Lookup |
+| Podcasts und Radio | RSS- und YouTube-Abos, bedingte Aktualisierung/Downloads, Resume-/Played-Status, rückgängig löschbare Episoden sowie Radio-Browser/manuelle Sender mit externer Wiedergabe und MPRIS |
+| Konzerte und Releases | Optionale Konzert- und Neuerscheinungssuche mit persistenten Filtern, Hintergrundaktualisierung, eigenen Ansichten und einer gemeinsamen Updates-Oberfläche |
+| Desktop und Dienste | MPRIS-Medientasten, Quick Settings, Benachrichtigungen, Sperrbildschirm-Metadaten, Themes, Cover-Akzent sowie unabhängige ListenBrainz-/Last.fm-Module mit Keyring-Credentials und Offline-Queues |
+| Android-Geräte | Playlist-spiegelnder MTP-Delta-Sync mit Speicher/Tempo/Fortschritt, Abbruch, sicheren Löschungen nur im verwalteten Bereich und optionalem Opus-Transcoding mit 256 kbit/s |
+| Instrumentalfassungen | Experimentelle Opt-in-Stem-Separation über einen separat paketierten Worker mit geprüfter Runtime-Bereitschaft, Staging-Preview, Speichern/Verwerfen und dauerhafter KI-Provenienz |
+| CLI- und MCP-Adapter | Headless-Befehle für Bibliothek/Suche/Playlists/Scan/Instrumentals sowie capability-gesteuerter, pfadsicherer MCP-Zugriff auf Playlists, Quellen, Discovery, Gerätesync, Instrumentals und optionale Wiedergabe |
+| Migration und Sicherheit | Einmaliger Rhythmbox-Import, Session-Restore ohne Autoplay, Missing-/Import-Flows, nur Datenbank-Remove und bestätigter Papierkorb |
 
 ## Architektur: ein Core, native Ränder
 
@@ -80,6 +83,9 @@ Integrationsschicht ergänzen.
 | `reprise-core` | Bibliothek, Datenbank-Facades, Queue-Semantik, Playlists, Settings, Module und Plattformverträge | Keine GTK-, libadwaita-, GStreamer-, zbus- oder GLib-Abhängigkeit |
 | `reprise-gnome` | GTK4-/libadwaita-Komposition, native Interaktionen, Accessibility, Theme und Präsentation | Kein produktives SQL, blockierendes HTTP, direkte GStreamer-Kopplung oder ungeprüftes Unsafe |
 | `reprise-platform-linux` | Linux-Implementierungen für Audio, Medienintegration, Geräte, Waveforms und Papierkorb | Implementiert die Core-Verträge; UI-Code erhält Interfaces |
+| `reprise-cli` | Headless-Befehle über Core-Facades für Bibliothek, Playlists, Scan und Instrumental-Jobs | Keine GUI-Abhängigkeiten oder duplizierten Produktregeln |
+| `reprise-mcp` | Lokale stdio-Tools und pfadsichere Ressourcen mit expliziten Lese-/Schreib-Capabilities | Kein produktives SQL, keine impliziten Mutationen und keine Pfad-/Credential-Leaks |
+| `reprise-stems` | Portable Stem-Separation und geprüfte Modell-/Runtime-Bereitstellung | Keine GUI-, Datenbank- oder Playback-Kopplung |
 
 Das ist bewusst keine gemeinsame Web-Shell. Der Rust-Core besitzt Daten und
 Verhalten; plattformspezifische Frontends besitzen native Interaktionsmuster.
@@ -131,15 +137,15 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 
 | Metrik | Aktuelle Evidenz |
 |---|---:|
-| Rust-Code | 125.878 Zeilen |
-| — Produktcode | 80.385 Zeilen |
-| — Testcode | 45.493 Zeilen |
-| Workspace-Gate | 1.903 bestandene Tests: 996 Core · 830 GNOME · 77 Linux-Plattform |
-| Tests mit kontrollierten Bedingungen | 229 vom Standardlauf getrennt: 228 GNOME-Display-/Host-Tests · 1 Linux-Benchmark |
-| UX-Verträge | 164 aktive Regeln; jede braucht einen regelbenannten Test |
-| Qualitätsgates | Vollständige Merge-Readiness- und Release-/Packaging-Gates bestanden |
+| Rust-Code | 175.286 Zeilen |
+| — Produktcode | 108.095 Zeilen |
+| — Testcode | 67.191 Zeilen |
+| Standard-Workspace-Lauf | 2.693 bestandene Tests; 2 Radio-MCP-Loopback-Fixtures durch Sandbox-TCP-Rechte blockiert |
+| Tests mit kontrollierten Bedingungen | 305 GNOME-Display-/Host-Tests explizit vom Standardlauf getrennt |
+| UX-Verträge | 165 aktive Regeln; jede braucht einen regelbenannten Test |
+| Code-Gates | Formatting, striktes Clippy, Core-Reinheit, Architektur, Accessibility, Input, Motion, UX-Traceability und Audit bestehen auf dem gezählten `dev`-Stand |
 
-<sub>Die Rust-Zeilen wurden beim Abschluss der Performance-Arbeit mit dem reproduzierbaren, <code>#[cfg(test)]</code>-fähigen Analyzer des Bewerbungs-/CV-Repositories auf dem committeten Stand gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor; Produkt- und Testcode werden getrennt ausgewiesen.</sub>
+<sub>Die Rust-Zeilen wurden vom committeten Reprise-<code>dev</code>-Stand <code>144672eaefed5a8b7b8fc5e3eb6e2d54a08fae0d</code> mit cloc 2.08 und dem reproduzierbaren, <code>#[cfg(test)]</code>-fähigen Analyzer gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor; Produkt- und Testcode werden getrennt ausgewiesen.</sub>
 
 ## Engineering-Praxis
 
@@ -174,23 +180,17 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
   Übernommen wird eine Änderung erst, wenn alle relevanten Tests und
   Qualitätsprüfungen bestanden sind.
 
-## Architekturziele
+## Architekturrichtung
 
-Reprise soll über die heutige GNOME-App hinauswachsen können, ohne zur
-gemeinsamen Web-Shell zu werden oder Produktregeln zu duplizieren. Daraus
-folgen zwei Richtungen:
+Die CLI- und MCP-Adapter belegen inzwischen, dass Reprise dieselbe getestete
+Anwendungsschicht ohne eingebettetes GTK-Frontend anbieten kann. Ihre
+Capabilities sind explizit, datenverändernde Tools standardmäßig deaktiviert
+und Antworten werden auf lokale Pfad- und Credential-Leaks geprüft.
 
-- **Schlanke native Frontends.** Eine künftige App für macOS, Windows, Mobile
-  oder ein anderes Linux-Toolkit soll den Rust-Core wiederverwenden, aber die
-  Interaktionsmuster und Plattformdienste ihres Systems selbst umsetzen.
-- **MCP- und CLI-Adapter.** Bibliothek, Playlists, Queue und Wiedergabe sollen
-  über schmale Adapter dieselbe getestete Anwendungsschicht nutzen. Fähigkeiten
-  bleiben explizit, standardmäßig read-only und dürfen weder lokale Pfade noch
-  Credentials versehentlich preisgeben.
-
-Das sind Architekturziele, keine ausgelieferten Features. Ihr Wert liegt in
-einem gemeinsamen Domänenmodell, ohne native UX oder Sicherheitsgrenzen zu
-opfern.
+Die nächste Architekturrichtung ist ein schlankes natives Frontend für eine
+weitere Plattform. Es soll den Rust-Core wiederverwenden und die passenden
+Interaktionsmuster und Plattformdienste selbst implementieren — statt Reprise
+in eine gemeinsame Web-Shell zu verwandeln oder Produktregeln zu duplizieren.
 
 ## Quelltext und Kontakt
 
