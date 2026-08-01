@@ -14,22 +14,22 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-2021%20edition-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust 2021 edition">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/product%20code-108.1k%20lines-22262b?style=flat-square&labelColor=16181b" alt="108.1k lines of product code">
-  <img src="https://img.shields.io/badge/test%20code-67.2k%20lines-22262b?style=flat-square&labelColor=16181b" alt="67.2k lines of test code">
+  <img src="https://img.shields.io/badge/product%20code-176.9k%20lines-22262b?style=flat-square&labelColor=16181b" alt="176.9k lines of product code">
+  <img src="https://img.shields.io/badge/test%20code-64.5k%20lines-22262b?style=flat-square&labelColor=16181b" alt="64.5k lines of test code">
   <img src="https://img.shields.io/badge/tests-2%2C693%20passing-22262b?style=flat-square&labelColor=16181b" alt="2,693 passing tests">
   <img src="https://img.shields.io/badge/clippy-0%20warnings-22262b?style=flat-square&labelColor=16181b" alt="clippy: 0 warnings">
   <img src="https://img.shields.io/badge/status-active-33c9a3?style=flat-square&labelColor=16181b" alt="status: active">
 </p>
 
-<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 27 July 2026</sub></p>
+<p><sub>Started on 11 July 2026 · active portfolio project · no public release yet · evidence updated 2 August 2026</sub></p>
 
 </div>
 
 Reprise is built local-library first: virtualized views over large collections,
 serious metadata tooling, listening statistics, Android sync, and tight GNOME
 integration. The product is also an architecture experiment: domain behavior
-lives in a platform-neutral Rust core, while every platform should keep a
-small, genuinely native UI and integration layer.
+lives in a platform-neutral Rust core, while each frontend family keeps only
+its deliberately chosen UI and integration layer.
 
 ## Interface
 
@@ -77,7 +77,7 @@ small, genuinely native UI and integration layer.
 
 ## Architecture: one core, native edges
 
-![Reprise architecture: the GTK frontend sends commands and queries to the portable core; the Linux adapter implements the core's playback, media, device, and analysis contracts; GUI and host dependencies are mechanically forbidden in the core.](assets/reprise-architecture.svg)
+![Reprise architecture and roadmap: the current native GNOME frontend and Linux adapter surround the portable core; a native Kotlin Android frontend comes next, followed by one Tauri 2 desktop frontend for KDE/Linux, Windows, and macOS.](assets/reprise-architecture.svg)
 
 | Crate | Responsibility | Enforced boundary |
 |---|---|---|
@@ -88,10 +88,11 @@ small, genuinely native UI and integration layer.
 | `reprise-mcp` | Local stdio tools and path-safe resources with explicit read/write capabilities | No productive SQL, implicit mutation, path leakage, or credential leakage |
 | `reprise-stems` | Portable stem-separation engine and verified model/runtime provisioning | No GUI, database, or playback coupling |
 
-This is deliberately not a shared web shell. The Rust core owns data and
-behavior; platform-specific frontends own native interaction patterns. The
-current GTK app proves the boundary today, while additional frontends remain a
-roadmap direction rather than a shipped claim.
+The current GTK app proves the boundary today. Native Kotlin for Android is
+the next frontend stage. After that, one shared `Tauri 2` desktop frontend is
+planned for KDE/Linux, Windows, and macOS. Those roadmap stages are not shipped
+claims, and the shared desktop frontend does not replace the native GNOME or
+Android experiences.
 
 ## Performance: measure, change, compare
 
@@ -136,15 +137,14 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 | Metric | Current evidence |
 |---|---:|
-| Rust code | 175,286 lines |
-| — product code | 108,095 lines |
-| — test code | 67,191 lines |
-| Standard workspace run | 2,693 passing tests; 2 Radio MCP loopback fixtures blocked by sandbox TCP permissions |
-| Controlled-condition tests | 305 GNOME display/host tests explicitly separated from the default run |
-| UX contracts | 165 active rules, each requiring a rule-named test |
-| Code gates | Formatting, strict Clippy, core purity, architecture, accessibility, input, motion, UX traceability, and audit pass on the counted `dev` line |
+| Rust code | 241,421 lines |
+| — product code | 176,874 lines |
+| — test code | 64,547 lines |
+| Counted revision | Published `dev@2e5aff6e44` from 1 August 2026 |
+| UX contracts | More than 300 active rules, each requiring a rule-named test |
+| Quality gates | 17 merge gates, including workspace, display, runtime-bus, architecture, and audit checks |
 
-<sub>Rust lines were counted from committed Reprise <code>dev</code> commit <code>144672eaefed5a8b7b8fc5e3eb6e2d54a08fae0d</code> with cloc 2.08 and the reproducible <code>#[cfg(test)]</code>-aware analyzer. Blank and comment-only lines are excluded; product and test code are reported separately.</sub>
+<sub>Rust lines were counted directly with the installed <code>cloc 2.08</code> on committed Reprise <code>dev@2e5aff6e4448246cbe3f1ad122cf8f023537bd69</code>. Blank and comment-only lines are excluded. Product and test code are separated by Reprise's explicit test-file conventions (<code>tests/</code>, <code>tests.rs</code>, <code>test_*.rs</code>, <code>*_tests.rs</code>, <code>*_smoke.rs</code>, and siblings); no custom Rust analyzer is used.</sub>
 
 ## Engineering practice
 
@@ -180,15 +180,22 @@ portable CI thresholds; deterministic cache and memory budgets are hard tests.
 
 ## Architecture direction
 
-The CLI and MCP adapters now prove that Reprise can expose the same tested
-application layer without embedding the GTK frontend. Their capabilities are
-explicit, data-mutating tools default off, and responses are tested against
-local path and credential leakage.
+Reprise should grow beyond the current GNOME app without duplicating product
+rules or forcing one UI technology onto every target. Three directions follow:
 
-The next architectural direction is a thin native frontend for another
-platform. It should reuse the Rust core while implementing the interaction
-patterns and platform services that belong on its host — not turn Reprise into
-a shared web shell or duplicate product rules.
+- **Native Kotlin for Android.** The next user-facing frontend is an Android
+  app written natively in Kotlin, with Android interaction and service patterns
+  owned on that side of the core boundary.
+- **One Tauri 2 desktop frontend.** After Android, a shared desktop UI targets
+  KDE/Linux, Windows, and macOS while reusing the Rust domain and runtime seams.
+- **MCP and CLI adapters.** Library, playlist, queue, and playback capabilities
+  already cross narrow adapters over the same tested application layer.
+  Capabilities stay explicit, read-only by default where appropriate, and must
+  not expose local paths or credentials by accident.
+
+The Android and Tauri stages are roadmap goals, not shipped features. The
+roadmap stops with those named targets; its value is reuse of one domain model
+without weakening platform UX or safety rules.
 
 ## Source and contact
 
