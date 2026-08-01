@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
-  <title id="title">Wo Verhalten im Reprise-Workspace mit drei Crates lebt</title>
-  <desc id="description">Das GTK-Frontend sendet Befehle und Queries an den portablen Core und stellt dessen Zustand dar. Der Linux-Adapter implementiert die Playback-, Medien-, Geräte- und Analyseverträge des Cores. GTK, libadwaita, GStreamer und zbus sind im Core mechanisch verboten.</desc>
+  <title id="title">Wo Reprise-Verhalten lebt und welche Frontends als Nächstes kommen</title>
+  <desc id="description">Das heutige GTK-Frontend und der Linux-Adapter umgeben den portablen Rust-Core. Danach folgt Android nativ mit Kotlin und später ein gemeinsames Tauri-2-Desktop-Frontend für KDE unter Linux, Windows und macOS.</desc>
 
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
@@ -58,10 +58,10 @@
       <path d="M37 28a15 15 0 0 1-23 8l3-1-1 4-2-2a19 19 0 0 0 25-8z" fill="#f6f5f4"/>
     </g>
     <text x="142" y="84" class="eyebrow" fill="#8fbff5">REPRISE</text>
-    <text x="142" y="108" class="small" fill="#94a3b8">AKTUELLER DREI-CRATE-WORKSPACE</text>
+    <text x="142" y="108" class="small" fill="#94a3b8">AKTUELLE CORE-GRENZE + FRONTEND-ROADMAP</text>
 
     <text x="76" y="174" class="title" fill="#f8fafc">Wo Verhalten lebt.</text>
-    <text x="76" y="208" class="subtitle" fill="#aab6c8">Eine Domänenautorität, native Präsentation und austauschbare Host-Adapter.</text>
+    <text x="76" y="208" class="subtitle" fill="#aab6c8">Heute eine Domänenautorität, danach eine explizite Folge weiterer UI-Codebasen.</text>
 
     <!-- Native frontend -->
     <g filter="url(#shadow)">
@@ -115,25 +115,21 @@
     <path d="M458 505H418" fill="none" stroke="#57e0bf" stroke-width="3" marker-end="url(#arrow-green)"/>
     <path d="M1042 500H1002" fill="none" stroke="#57e0bf" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#arrow-green)"/>
 
-    <!-- Enforced purity -->
+    <!-- Frontend roadmap -->
     <g filter="url(#shadow)">
       <rect x="76" y="696" width="1288" height="126" rx="20" fill="#151d2a" stroke="#35445a"/>
     </g>
-    <text x="108" y="737" class="eyebrow" fill="#d8a35d">VERBOTEN IN reprise-core</text>
-    <g class="mono">
-      <rect x="108" y="758" width="104" height="36" rx="10" fill="#0d1521"/>
-      <text x="160" y="782" class="small" text-anchor="middle" fill="#cbd5e1">GTK</text>
-      <rect x="224" y="758" width="136" height="36" rx="10" fill="#0d1521"/>
-      <text x="292" y="782" class="small" text-anchor="middle" fill="#cbd5e1">libadwaita</text>
-      <rect x="372" y="758" width="138" height="36" rx="10" fill="#0d1521"/>
-      <text x="441" y="782" class="small" text-anchor="middle" fill="#cbd5e1">GStreamer</text>
-      <rect x="522" y="758" width="104" height="36" rx="10" fill="#0d1521"/>
-      <text x="574" y="782" class="small" text-anchor="middle" fill="#cbd5e1">zbus</text>
-    </g>
-    <path d="M704 756l12 12 23-28" fill="none" stroke="#74f0d0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="764" y="770" class="card-title" fill="#f8fafc">Durch Gates erzwungen</text>
-    <text x="764" y="797" class="body mono" fill="#aebdd0">architecture gate + cargo tree</text>
+    <text x="108" y="726" class="eyebrow" fill="#d8a35d">FRONTEND-ROADMAP · GEPLANT, NICHT AUSGELIEFERT</text>
+    <rect x="108" y="742" width="270" height="64" rx="12" fill="#0d1521" stroke="#62a0ea" stroke-opacity="0.42"/>
+    <text x="128" y="768" class="pill" fill="#9bc8f7">HEUTE · GNOME</text>
+    <text x="128" y="794" class="body" fill="#cbd5e1">GTK4 + libadwaita</text>
+    <rect x="402" y="742" width="300" height="64" rx="12" fill="#0d1521" stroke="#57e0bf" stroke-opacity="0.42"/>
+    <text x="422" y="768" class="pill" fill="#74f0d0">DANACH · ANDROID</text>
+    <text x="422" y="794" class="body" fill="#cbd5e1">NATIV MIT KOTLIN</text>
+    <rect x="726" y="742" width="606" height="64" rx="12" fill="#0d1521" stroke="#d8a35d" stroke-opacity="0.42"/>
+    <text x="746" y="768" class="pill" fill="#efc37f">SPÄTER · TAURI 2 DESKTOP</text>
+    <text x="746" y="794" class="body" fill="#cbd5e1">KDE/LINUX · WINDOWS · macOS</text>
 
-    <text x="76" y="861" class="small" fill="#94a3b8">Ergebnis: Domänentests brauchen weder GTK noch Host-Dienste; Produktregeln bleiben im Core.</text>
+    <text x="76" y="861" class="small" fill="#94a3b8">Der Rust-Core hält Produktregeln gemeinsam; GNOME, Android und die spätere Desktop-UI behalten eigene Präsentationsverantwortung.</text>
   </g>
 </svg>

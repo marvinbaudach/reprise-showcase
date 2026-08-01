@@ -12,14 +12,14 @@
 <p>
   <img src="https://img.shields.io/badge/Rust-Edition%202021-22262b?style=flat-square&logo=rust&logoColor=e7e9ec&labelColor=16181b" alt="Rust Edition 2021">
   <img src="https://img.shields.io/badge/GTK4-libadwaita-22262b?style=flat-square&labelColor=16181b" alt="GTK4 / libadwaita">
-  <img src="https://img.shields.io/badge/Produktcode-108.1k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="108.100 Zeilen Produktcode">
-  <img src="https://img.shields.io/badge/Testcode-67.2k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="67.200 Zeilen Testcode">
+  <img src="https://img.shields.io/badge/Produktcode-176.9k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="176.900 Zeilen Produktcode">
+  <img src="https://img.shields.io/badge/Testcode-64.5k%20Zeilen-22262b?style=flat-square&labelColor=16181b" alt="64.500 Zeilen Testcode">
   <img src="https://img.shields.io/badge/Tests-2%2C693%20bestanden-22262b?style=flat-square&labelColor=16181b" alt="2.693 bestandene Tests">
   <img src="https://img.shields.io/badge/Clippy-0%20Warnungen-22262b?style=flat-square&labelColor=16181b" alt="Clippy: 0 Warnungen">
   <img src="https://img.shields.io/badge/Status-aktiv-33c9a3?style=flat-square&labelColor=16181b" alt="Status: aktiv">
 </p>
 
-<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 27. Juli 2026</sub></p>
+<p><sub>Gestartet am 11. Juli 2026 · aktives Portfolio-Projekt · noch kein öffentliches Release · Evidenz aktualisiert am 2. August 2026</sub></p>
 
 </div>
 
@@ -27,8 +27,8 @@ Reprise denkt zuerst an lokale Musiksammlungen: virtualisierte Ansichten für
 große Bibliotheken, ernsthafte Metadatenwerkzeuge, Hörstatistiken, Android-Sync
 und eine enge GNOME-Integration. Gleichzeitig ist das Produkt ein
 Architekturexperiment: Das Domänenverhalten lebt in einem plattformneutralen
-Rust-Core; jede Plattform soll nur eine kleine, wirklich native UI- und
-Integrationsschicht ergänzen.
+Rust-Core; für jede Frontend-Familie bleibt nur ihre bewusst gewählte UI- und
+Integrationsschicht.
 
 ## Oberfläche
 
@@ -76,7 +76,7 @@ Integrationsschicht ergänzen.
 
 ## Architektur: ein Core, native Ränder
 
-![Reprise-Architektur: Das GTK-Frontend sendet Befehle und Queries an den portablen Core; der Linux-Adapter implementiert dessen Playback-, Medien-, Geräte- und Analyseverträge; GUI- und Host-Abhängigkeiten sind im Core mechanisch verboten.](assets/reprise-architecture-de.svg)
+![Reprise-Architektur und Roadmap: Das heutige native GNOME-Frontend und der Linux-Adapter umgeben den portablen Core; als Nächstes folgt Android nativ mit Kotlin, danach ein gemeinsames Tauri-2-Desktop-Frontend für KDE/Linux, Windows und macOS.](assets/reprise-architecture-de.svg)
 
 | Crate | Verantwortung | Erzwungene Grenze |
 |---|---|---|
@@ -87,10 +87,11 @@ Integrationsschicht ergänzen.
 | `reprise-mcp` | Lokale stdio-Tools und pfadsichere Ressourcen mit expliziten Lese-/Schreib-Capabilities | Kein produktives SQL, keine impliziten Mutationen und keine Pfad-/Credential-Leaks |
 | `reprise-stems` | Portable Stem-Separation und geprüfte Modell-/Runtime-Bereitstellung | Keine GUI-, Datenbank- oder Playback-Kopplung |
 
-Das ist bewusst keine gemeinsame Web-Shell. Der Rust-Core besitzt Daten und
-Verhalten; plattformspezifische Frontends besitzen native Interaktionsmuster.
-Die GTK-App beweist die Grenze heute. Weitere Frontends sind eine Roadmap-
-Richtung und keine bereits ausgelieferte Behauptung.
+Die heutige GTK-App beweist die Grenze. Als nächste Frontend-Stufe folgt
+Android nativ mit Kotlin. Danach ist ein gemeinsames `Tauri 2`-Desktop-
+Frontend für KDE/Linux, Windows und macOS geplant. Diese Roadmap-Stufen sind
+nicht ausgeliefert; das gemeinsame Desktop-Frontend ersetzt weder die native
+GNOME- noch die Android-Erfahrung.
 
 ## Performance: messen, ändern, vergleichen
 
@@ -137,15 +138,14 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 
 | Metrik | Aktuelle Evidenz |
 |---|---:|
-| Rust-Code | 175.286 Zeilen |
-| — Produktcode | 108.095 Zeilen |
-| — Testcode | 67.191 Zeilen |
-| Standard-Workspace-Lauf | 2.693 bestandene Tests; 2 Radio-MCP-Loopback-Fixtures durch Sandbox-TCP-Rechte blockiert |
-| Tests mit kontrollierten Bedingungen | 305 GNOME-Display-/Host-Tests explizit vom Standardlauf getrennt |
-| UX-Verträge | 165 aktive Regeln; jede braucht einen regelbenannten Test |
-| Code-Gates | Formatting, striktes Clippy, Core-Reinheit, Architektur, Accessibility, Input, Motion, UX-Traceability und Audit bestehen auf dem gezählten `dev`-Stand |
+| Rust-Code | 241.421 Zeilen |
+| — Produktcode | 176.874 Zeilen |
+| — Testcode | 64.547 Zeilen |
+| Gezählter Stand | Veröffentlichter `dev@2e5aff6e44` vom 1. August 2026 |
+| UX-Verträge | Mehr als 300 aktive Regeln; jede braucht einen regelbenannten Test |
+| Qualitätsgates | 17 Merge-Gates einschließlich Workspace-, Display-, Runtime-Bus-, Architektur- und Audit-Prüfungen |
 
-<sub>Die Rust-Zeilen wurden vom committeten Reprise-<code>dev</code>-Stand <code>144672eaefed5a8b7b8fc5e3eb6e2d54a08fae0d</code> mit cloc 2.08 und dem reproduzierbaren, <code>#[cfg(test)]</code>-fähigen Analyzer gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor; Produkt- und Testcode werden getrennt ausgewiesen.</sub>
+<sub>Die Rust-Zeilen wurden direkt mit dem installierten <code>cloc 2.08</code> auf dem committeten Reprise-Stand <code>dev@2e5aff6e4448246cbe3f1ad122cf8f023537bd69</code> gezählt. Leerzeilen und reine Kommentarzeilen bleiben außen vor. Produkt- und Testcode werden über die expliziten Reprise-Dateikonventionen getrennt (<code>tests/</code>, <code>tests.rs</code>, <code>test_*.rs</code>, <code>*_tests.rs</code>, <code>*_smoke.rs</code> und verwandte Namen); ein eigener Rust-Analyzer wird nicht verwendet.</sub>
 
 ## Engineering-Praxis
 
@@ -182,15 +182,24 @@ CI-Grenzwerte; deterministische Cache- und Speicherbudgets sind harte Tests.
 
 ## Architekturrichtung
 
-Die CLI- und MCP-Adapter belegen inzwischen, dass Reprise dieselbe getestete
-Anwendungsschicht ohne eingebettetes GTK-Frontend anbieten kann. Ihre
-Capabilities sind explizit, datenverändernde Tools standardmäßig deaktiviert
-und Antworten werden auf lokale Pfad- und Credential-Leaks geprüft.
+Reprise soll über die heutige GNOME-App hinauswachsen, ohne Produktregeln zu
+duplizieren oder allen Zielen dieselbe UI-Technologie aufzuzwingen. Daraus
+folgen drei Richtungen:
 
-Die nächste Architekturrichtung ist ein schlankes natives Frontend für eine
-weitere Plattform. Es soll den Rust-Core wiederverwenden und die passenden
-Interaktionsmuster und Plattformdienste selbst implementieren — statt Reprise
-in eine gemeinsame Web-Shell zu verwandeln oder Produktregeln zu duplizieren.
+- **Android nativ mit Kotlin.** Das nächste nutzerseitige Frontend ist eine
+  native Kotlin-App, die Android-Interaktion und -Dienste auf ihrer Seite der
+  Core-Grenze besitzt.
+- **Ein Tauri-2-Desktop-Frontend.** Nach Android zielt eine gemeinsame
+  Desktop-UI auf KDE/Linux, Windows und macOS und nutzt dieselben Rust-Domänen-
+  und Runtime-Grenzen.
+- **MCP- und CLI-Adapter.** Bibliothek, Playlists, Queue und Wiedergabe nutzen
+  bereits schmale Adapter über dieselbe getestete Anwendungsschicht.
+  Capabilities bleiben explizit, wo passend standardmäßig read-only, und
+  dürfen weder lokale Pfade noch Credentials versehentlich preisgeben.
+
+Android und Tauri sind Roadmap-Ziele, keine ausgelieferten Features. Die
+Roadmap endet mit diesen benannten Zielen; ihr Wert liegt in einem gemeinsamen
+Domänenmodell, ohne Plattform-UX oder Sicherheitsregeln zu schwächen.
 
 ## Quelltext und Kontakt
 
